@@ -9,8 +9,6 @@ import { logout } from './state/auth/auth.actions';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'bicycle-reservation-frontend';
-
   loggedIn$ = this.store.select((state) => state.auth.loggedIn);
 
   constructor(private store: Store<AppState>) {

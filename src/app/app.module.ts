@@ -13,6 +13,8 @@ import { authReducer } from './state/auth/auth.reducer';
 import { AuthEffects } from './state/auth/auth.effects';
 import { MapModule } from './map/map.module';
 import { NavComponent } from './nav/nav.component';
+import { AuthModule } from './user/auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [AppComponent, NavComponent],
@@ -27,6 +29,7 @@ import { NavComponent } from './nav/nav.component';
     ToastrModule.forRoot(),
     EffectsModule.forRoot([AuthEffects]),
     MapModule,
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -25,6 +25,7 @@ export const initialState: AuthState = {
     prezime: '',
     username: '',
     email: '',
+    imageUrl: null,
     role: null,
     verified: false,
   },
@@ -58,6 +59,7 @@ export const authReducer = createReducer(
       user: data.user,
       token: data.token,
       loggedIn: true,
+      imageUrl: data.user.imageUrl,
       error: null,
     };
   }),
@@ -90,6 +92,7 @@ export const authReducer = createReducer(
         username: '',
         email: '',
         role: null,
+        imageUrl: null,
         verified: false,
       },
       token: '',

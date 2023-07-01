@@ -6,6 +6,7 @@ export interface IUser {
   prezime: string;
   username: string;
   email: string;
+  imageUrl: string | null;
   role: UserRole;
   verified: boolean;
 }

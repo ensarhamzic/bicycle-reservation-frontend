@@ -1,1 +1,52 @@
-<p>register works!</p>
+<mat-card class="auth-card">
+  <mat-card-header class="auth-header">
+    <mat-card-subtitle>Ride a bike!</mat-card-subtitle>
+    <mat-card-title>Register new account</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+    <form [formGroup]="form" (ngSubmit)="register()">
+      <app-input
+        title="First Name"
+        placeholder="First Name"
+        [control]="firstName"
+        [error]="firstNameError"
+      ></app-input>
+      <app-input
+        title="Last Name"
+        placeholder="Last Name"
+        [control]="lastName"
+        [error]="lastNameError"
+      ></app-input>
+      <app-input
+        title="Email"
+        placeholder="Email"
+        [control]="email"
+        [error]="emailError"
+      ></app-input>
+      <app-input
+        title="Username"
+        placeholder="Username"
+        [control]="username"
+        [error]="usernameError"
+      ></app-input>
+      <app-input
+        title="Password"
+        placeholder="Password"
+        type="password"
+        [control]="password"
+        [error]="passwordError"
+      ></app-input>
+      <app-input
+        title="Confirm Password"
+        placeholder="Confirm Password"
+        type="password"
+        [control]="confirmPassword"
+        [error]="confirmPasswordError"
+      ></app-input>
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="auth-actions">
+    <button mat-stroked-button color="primary">Register</button>
+  </mat-card-actions>
+</mat-card>

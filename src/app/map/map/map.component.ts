@@ -39,7 +39,7 @@ export class MapComponent {
 
   onMapClick(event: google.maps.MapMouseEvent) {
     event.stop(); // prevents map icon click event
-    console.log(event.latLng?.toJSON().lat);
+    console.log(event.latLng?.toJSON()); // coordinates
   }
 
   onMarkerClick(event: string) {
