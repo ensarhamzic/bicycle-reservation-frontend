@@ -1,5 +1,12 @@
 <google-map
   [height]="mapHeight"
   [width]="mapWidth"
-  [options]="options"
-></google-map>
+  [options]="mapOptions"
+  (mapClick)="onMapClick($event)"
+>
+  <map-marker
+    (mapClick)="onMarkerClick('ensar')"
+    [position]="mapOptions.center!"
+    [options]="markerOptions"
+  ></map-marker>
+</google-map>

@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  width: 100%;
+  position: sticky;
+  background-color: #EEE;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+header .logo {
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #444;
+}
+
+.logo img {
+  width: 150px;
+}
+
+header .menu-btn img {
+  width: 32px;
+}
+
+nav {
+  z-index: 999;
+  width: 100%;
+  height: 100vh;
+  background-color: #444;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+nav a {
+  color: #FFF;
+  text-decoration: none;
+  font-size: 20px;
+  margin-bottom: 32px;
+  text-transform: uppercase;
+  font-weight: 900;
+  position: relative;
+}
+
+nav a:hover::after {
+  content: '';
+  height: 2px;
+  width: 50%;
+  background-color: #FFF;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+nav #close-nav {
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 10px 30px;
+  cursor: pointer;
+  font-size: 32px;
+}
+
+nav #close-nav:hover::after {
+  content: none;
+}
+
+nav #close-nav:hover {
+  background-color: #EEE !important;
+  color: #444 !important;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+
+.menu-btn {
+  width: 30px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}

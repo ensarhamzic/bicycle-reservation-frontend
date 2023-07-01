@@ -1,1 +1,1 @@
-export type UserRole = 'SERVISER' | 'OSOBLJE' | 'KLIJENT' | 'MENADZER' | '';
+export type UserRole = 'Servicer' | 'Management' | 'Client' | 'Admin' | null;
