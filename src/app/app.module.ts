@@ -11,9 +11,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { authReducer } from './state/auth/auth.reducer';
 import { AuthEffects } from './state/auth/auth.effects';
+import { MapModule } from './map/map.module';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NavComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,6 +26,7 @@ import { AuthEffects } from './state/auth/auth.effects';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     EffectsModule.forRoot([AuthEffects]),
+    MapModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
