@@ -4,6 +4,8 @@ import { AppState } from '../state/app.state';
 import { UserRole } from '../shared/types/user-role.type';
 import { MatDialog } from '@angular/material/dialog';
 import { AddStationComponent } from '../user/admin/add-station/add-station.component';
+import { IStation } from '../shared/models/station.model';
+import { StationService } from '../services/station.service';
 
 @Component({
   selector: 'app-home',
@@ -14,24 +16,51 @@ export class HomeComponent {
   role$ = this.store.select((state) => state.auth.user.role);
   role: UserRole = null;
 
+  stations: IStation[] = [
+    {
+      id: 1,
+      name: 'Stanica 1',
+      lat: 43.141096,
+      lng: 20.518112,
+    },
+    {
+      id: 1,
+      name: 'Stanica 1',
+      lat: 43.15,
+      lng: 20.53,
+    },
+  ];
   addStation: { lat: number; lng: number } | null = null;
 
-  constructor(private store: Store<AppState>, public dialog: MatDialog) {
+  constructor(
+    private store: Store<AppState>,
+    public dialog: MatDialog,
+    private stationService: StationService
+  ) {
     this.role$.subscribe((role) => {
       this.role = role;
+    });
+
+    this.stationService.getStations().subscribe((data) => {
+      this.stations = data;
     });
   }
 
   mapClickHandler(event: google.maps.MapMouseEvent) {
-    // if (this.role === 'Admin' && event.latLng) {
-    if (event.latLng) {
+    if (this.role === 'Admin' && event.latLng) {
       this.addStation = {
         lat: event.latLng.toJSON().lat,
         lng: event.latLng.toJSON().lng,
       };
-      this.dialog.open(AddStationComponent, {
+      const addStationDialogRef = this.dialog.open(AddStationComponent, {
         enterAnimationDuration: 200,
         exitAnimationDuration: 200,
+        data: this.addStation,
+      });
+
+      addStationDialogRef.afterClosed().subscribe((data) => {
+        this.addStation = null;
+        if (data) this.stations.push(data);
       });
     }
   }

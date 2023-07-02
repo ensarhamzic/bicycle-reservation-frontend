@@ -5,8 +5,9 @@
   (mapClick)="onMapClick($event)"
 >
   <map-marker
-    (mapClick)="onMarkerClick(1)"
-    [position]="mapOptions.center!"
+    *ngFor="let station of stations"
+    (mapClick)="onMarkerClick(station.id)"
+    [position]="{ lat: station.lat, lng: station.lng }"
     [options]="markerOptions"
   ></map-marker>
 

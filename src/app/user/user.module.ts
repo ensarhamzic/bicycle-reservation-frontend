@@ -1,12 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { UserRoutingModule } from './user-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { AddStationComponent } from './admin/add-station/add-station.component';
 
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [AddStationComponent],
@@ -16,6 +23,12 @@ import { MatButtonModule } from '@angular/material/button';
     AuthModule,
     MatDialogModule,
     MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
+    SharedModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   exports: [AddStationComponent],
 })
