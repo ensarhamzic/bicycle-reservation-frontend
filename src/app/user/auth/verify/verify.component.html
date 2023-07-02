@@ -1,0 +1,40 @@
+<div [class]="(loading$ | async) ? 'error' : ''">
+  <mat-card class="auth-card" *ngIf="!(loading$ | async)">
+    <mat-card-header class="auth-header">
+      <mat-card-subtitle>Ride a bike!</mat-card-subtitle>
+      <mat-card-title>Verify your Account</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-divider></mat-divider>
+      <form [formGroup]="form">
+        <app-input
+          title="Token"
+          placeholder="Token"
+          [control]="token"
+          [error]="tokenError"
+        ></app-input>
+        <button
+        mat-stroked-button
+        color="accent"
+        [disabled]="loading$ | async"
+        (click)="resend()"
+        [disabled]="disabled"
+      >
+        {{showValue}}
+      </button>
+      </form>
+      <mat-error *ngIf="error$ | async as error">{{ error }}</mat-error>
+    </mat-card-content>
+    <mat-card-actions class="auth-actions">
+      <button
+        mat-stroked-button
+        color="primary"
+        [disabled]="loading$ | async"
+        (click)="verify()"
+      >
+        Verify
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-spinner *ngIf="loading$ | async"></mat-spinner>
+</div>

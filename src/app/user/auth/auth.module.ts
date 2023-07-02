@@ -13,8 +13,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { VerifyComponent } from './verify/verify.component';
+import { ForgotPasswordEmailComponent } from './forgot-password-email/forgot-password-email.component';
+import { ForgotPasswordResetComponent } from './forgot-password-reset/forgot-password-reset.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, VerifyComponent, ForgotPasswordEmailComponent, ForgotPasswordResetComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -25,6 +29,7 @@ import { MatInputModule } from '@angular/material/input';
     SharedModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule
   ],
 })
 export class AuthModule {}

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AuthService } from 'src/app/services/auth.service';
 import { AppState } from 'src/app/state/app.state';
+import { AuthService } from 'src/app/services/auth.service';
 import { login } from 'src/app/state/auth/auth.actions';
 
 @Component({

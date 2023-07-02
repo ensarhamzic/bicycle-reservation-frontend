@@ -7,7 +7,14 @@ import {
   authSuccess,
   checkToken,
   logout,
+  verify,
+  forgotPasswordEmail,
+  forgotPasswordEmailSuccess,
+  forgotPasswordEmailFailure,
+  forgotPasswordReset,
+  resendVerifyEmail,
 } from './auth.actions';
+import { state } from '@angular/animations';
 
 export interface AuthState {
   loading: boolean;
@@ -98,6 +105,49 @@ export const authReducer = createReducer(
       token: '',
       loggedIn: false,
       error: null,
+    };
+  }),
+
+  on(verify, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+
+  on(forgotPasswordEmail, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+
+  on(forgotPasswordEmailSuccess, (state) => {
+    return {
+      ...state,
+      loading: false,
+    };
+  }),
+
+  on(forgotPasswordEmailFailure, (state, { error }) => {
+    return {
+      ...state,
+      loading: false,
+      error,
+    };
+  }),
+
+  on(forgotPasswordReset, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+
+  on(resendVerifyEmail, (state) => {
+    return {
+      ...state,
+      loading: true,
     };
   })
 );

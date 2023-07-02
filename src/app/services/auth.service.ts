@@ -25,4 +25,23 @@ export class AuthService {
   checktoken = (token: string): Observable<IAuth> => {
     return this.http.post<IAuth>(`${environment.apiUrl}/auth/check`, { token });
   };
+
+  verify = (token: string, email: string): Observable<IAuth> => {
+    return this.http.post<IAuth>(`${environment.apiUrl}/auth/verify`, {
+      token,
+      email,
+    });
+  }
+
+  resendVerifyEmail = (email: string): Observable<any> => {
+    return this.http.post<any>(`${environment.apiUrl}/Auth/resend-verification-token`, { email });
+  }
+
+  forgotPasswordEmail = (email: string): Observable<any> => {
+    return this.http.post<any>(`${environment.apiUrl}/Auth/forgot-password`, { email });
+  }
+
+  forgotPasswordReset = (token: string, password: string, email: string): Observable<any> => {
+    return this.http.post<any>(`${environment.apiUrl}/Auth/reset-password`, { token, password, email });
+  }
 }
