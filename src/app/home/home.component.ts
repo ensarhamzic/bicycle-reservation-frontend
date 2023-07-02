@@ -16,20 +16,7 @@ export class HomeComponent {
   role$ = this.store.select((state) => state.auth.user.role);
   role: UserRole = null;
 
-  stations: IStation[] = [
-    {
-      id: 1,
-      name: 'Stanica 1',
-      lat: 43.141096,
-      lng: 20.518112,
-    },
-    {
-      id: 1,
-      name: 'Stanica 1',
-      lat: 43.15,
-      lng: 20.53,
-    },
-  ];
+  stations: IStation[] = [];
   addStation: { lat: number; lng: number } | null = null;
 
   constructor(
