@@ -5,8 +5,14 @@
   (mapClick)="onMapClick($event)"
 >
   <map-marker
-    (mapClick)="onMarkerClick('ensar')"
+    (mapClick)="onMarkerClick(1)"
     [position]="mapOptions.center!"
     [options]="markerOptions"
+  ></map-marker>
+
+  <map-marker
+    *ngIf="tempMarker"
+    [position]="tempMarker"
+    [options]="tempMarkerOptions"
   ></map-marker>
 </google-map>
