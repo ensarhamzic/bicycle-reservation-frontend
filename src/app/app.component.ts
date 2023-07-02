@@ -11,7 +11,5 @@ import { logout } from './state/auth/auth.actions';
 export class AppComponent {
   loggedIn$ = this.store.select((state) => state.auth.loggedIn);
 
-  constructor(private store: Store<AppState>) {
-    store.dispatch(logout());
-  }
+  constructor(private store: Store<AppState>) {}
 }

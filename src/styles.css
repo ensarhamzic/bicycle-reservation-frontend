@@ -19,6 +19,7 @@ body {
 .auth-card {
   width: 700px;
   margin: 50px auto;
+  padding: 30px;
 }
 
 .auth-header {

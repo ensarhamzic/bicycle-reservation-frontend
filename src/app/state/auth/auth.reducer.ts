@@ -21,8 +21,8 @@ export const initialState: AuthState = {
   loading: false,
   user: {
     id: 0,
-    ime: '',
-    prezime: '',
+    firstName: '',
+    lastName: '',
     username: '',
     email: '',
     imageUrl: null,
@@ -65,6 +65,7 @@ export const authReducer = createReducer(
   }),
 
   on(authFailure, (state, { error }) => {
+    console.log(error);
     return {
       ...state,
       loading: false,
@@ -87,8 +88,8 @@ export const authReducer = createReducer(
       loading: false,
       user: {
         id: 0,
-        ime: '',
-        prezime: '',
+        firstName: '',
+        lastName: '',
         username: '',
         email: '',
         role: null,

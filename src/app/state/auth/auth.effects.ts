@@ -19,10 +19,10 @@ export class AuthEffects {
   register$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(register),
-      switchMap(({ user }) => {
-        return this.authService.register(user).pipe(
+      switchMap((userData) => {
+        return this.authService.register(userData).pipe(
           map((data) => authSuccess({ data })),
-          catchError(({ error }) => of(authFailure({ error: error.message })))
+          catchError(({ error }) => of(authFailure({ error: error.error })))
         );
       })
     );

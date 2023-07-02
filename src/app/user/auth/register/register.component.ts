@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/services/auth.service';
+import { AppState } from 'src/app/state/app.state';
+import { register } from 'src/app/state/auth/auth.actions';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +25,10 @@ export class RegisterComponent {
   confirmPassword: FormControl = new FormControl('', Validators.required);
   username: FormControl = new FormControl('', Validators.required);
 
-  constructor(private authService: AuthService) {
+  loading$ = this.store.select((state) => state.auth.loading);
+  error$ = this.store.select((state) => state.auth.error);
+
+  constructor(private store: Store<AppState>) {
     this.form = new FormGroup({
       firstName: this.firstName,
       lastName: this.lastName,
@@ -35,7 +41,8 @@ export class RegisterComponent {
 
   register() {
     if (this.form.invalid) return;
-    this.authService.register(this.form.value);
+    console.log('ensar');
+    this.store.dispatch(register(this.form.value));
   }
 
   get usernameError() {

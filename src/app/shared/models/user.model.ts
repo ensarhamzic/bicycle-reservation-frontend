@@ -2,8 +2,8 @@ import { UserRole } from '../types/user-role.type';
 
 export interface IUser {
   id: number;
-  ime: string;
-  prezime: string;
+  firstName: string;
+  lastName: string;
   username: string;
   email: string;
   imageUrl: string | null;

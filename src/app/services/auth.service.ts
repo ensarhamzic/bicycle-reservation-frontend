@@ -11,7 +11,8 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register = (data: any): Observable<IAuth> => {
-    return this.http.post<IAuth>(`${environment.apiUrl}/auth/register`, data);
+    console.log(data);
+    return this.http.post<IAuth>(`${environment.apiUrl}/Auth/register`, data);
   };
 
   login = (username: string, password: string): Observable<IAuth> => {

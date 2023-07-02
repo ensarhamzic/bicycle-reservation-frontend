@@ -5,7 +5,7 @@
   </mat-card-header>
   <mat-card-content>
     <mat-divider></mat-divider>
-    <form [formGroup]="form" (ngSubmit)="register()">
+    <form [formGroup]="form">
       <app-input
         title="First Name"
         placeholder="First Name"
@@ -46,7 +46,15 @@
       ></app-input>
     </form>
   </mat-card-content>
+  <mat-error *ngIf="error$ | async as error">{{ error }}</mat-error>
   <mat-card-actions class="auth-actions">
-    <button mat-stroked-button color="primary">Register</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      [disabled]="loading$ | async"
+      (click)="register()"
+    >
+      Register
+    </button>
   </mat-card-actions>
 </mat-card>
