@@ -4,7 +4,7 @@ import { IAuth } from 'src/app/shared/models/auth.model';
 export const register = createAction('[Auth] Register', props<{ user: any }>());
 export const login = createAction(
   '[Auth] Login',
-  props<{ username: string; password: string }>()
+  props<{ email: string; password: string }>()
 );
 
 export const authSuccess = createAction(

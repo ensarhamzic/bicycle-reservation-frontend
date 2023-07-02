@@ -15,9 +15,9 @@ export class AuthService {
     return this.http.post<IAuth>(`${environment.apiUrl}/Auth/register`, data);
   };
 
-  login = (username: string, password: string): Observable<IAuth> => {
+  login = (email: string, password: string): Observable<IAuth> => {
     return this.http.post<IAuth>(`${environment.apiUrl}/auth/login`, {
-      username,
+      email,
       password,
     });
   };

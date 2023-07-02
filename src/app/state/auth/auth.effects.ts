@@ -11,10 +11,17 @@ import {
   checkToken,
   logout,
 } from './auth.actions';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthEffects {
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   register$ = createEffect(() => {
     return this.actions$.pipe(
@@ -22,6 +29,10 @@ export class AuthEffects {
       switchMap((userData) => {
         return this.authService.register(userData).pipe(
           map((data) => authSuccess({ data })),
+          tap(() => {
+            this.toastr.success('Registration successful');
+            this.router.navigate(['/login']);
+          }),
           catchError(({ error }) => of(authFailure({ error: error.error })))
         );
       })
@@ -31,10 +42,10 @@ export class AuthEffects {
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(login),
-      switchMap(({ username, password }) => {
-        return this.authService.login(username, password).pipe(
+      switchMap(({ email, password }) => {
+        return this.authService.login(email, password).pipe(
           map((data) => authSuccess({ data })),
-          catchError(({ error }) => of(authFailure({ error: error.message })))
+          catchError(({ error }) => of(authFailure({ error: error.error })))
         );
       })
     );

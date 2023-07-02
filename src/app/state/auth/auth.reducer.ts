@@ -59,7 +59,6 @@ export const authReducer = createReducer(
       user: data.user,
       token: data.token,
       loggedIn: true,
-      imageUrl: data.user.imageUrl,
       error: null,
     };
   }),

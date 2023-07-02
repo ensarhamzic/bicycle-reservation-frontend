@@ -5,12 +5,12 @@
   </mat-card-header>
   <mat-card-content>
     <mat-divider></mat-divider>
-    <form [formGroup]="form" (ngSubmit)="login()">
+    <form [formGroup]="form">
       <app-input
-        title="Username"
-        placeholder="Username"
-        [control]="username"
-        [error]="usernameError"
+        title="Email"
+        placeholder="Email"
+        [control]="email"
+        [error]="emailError"
       ></app-input>
       <app-input
         title="Password"
@@ -20,8 +20,16 @@
         [error]="passwordError"
       ></app-input>
     </form>
+    <mat-error *ngIf="error$ | async as error">{{ error }}</mat-error>
   </mat-card-content>
   <mat-card-actions class="auth-actions">
-    <button mat-stroked-button color="primary">Login</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      [disabled]="loading$ | async"
+      (click)="login()"
+    >
+      Login
+    </button>
   </mat-card-actions>
 </mat-card>

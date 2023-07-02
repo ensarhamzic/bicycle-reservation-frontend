@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/services/auth.service';
+import { AppState } from 'src/app/state/app.state';
+import { login } from 'src/app/state/auth/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -9,26 +12,35 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
   form: FormGroup = new FormGroup({});
-  username: FormControl = new FormControl('', [Validators.required]);
+  email: FormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
   password: FormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(8),
   ]);
 
-  constructor(private authService: AuthService) {
+  loading$ = this.store.select((state) => state.auth.loading);
+  error$ = this.store.select((state) => state.auth.error);
+
+  constructor(private store: Store<AppState>) {
     this.form = new FormGroup({
-      username: this.username,
+      username: this.email,
       password: this.password,
     });
   }
 
   login() {
     if (this.form.invalid) return;
-    this.authService.login(this.username.value, this.password.value);
+    this.store.dispatch(
+      login({ email: this.email.value, password: this.password.value })
+    );
   }
 
-  get usernameError() {
-    if (this.username.hasError('required')) return 'Username is required';
+  get emailError() {
+    if (this.email.hasError('required')) return 'Username is required';
+    if (this.email.hasError('email')) return 'Username must be an email';
     return '';
   }
 

@@ -45,8 +45,8 @@
         [error]="confirmPasswordError"
       ></app-input>
     </form>
+    <mat-error *ngIf="error$ | async as error">{{ error }}</mat-error>
   </mat-card-content>
-  <mat-error *ngIf="error$ | async as error">{{ error }}</mat-error>
   <mat-card-actions class="auth-actions">
     <button
       mat-stroked-button
