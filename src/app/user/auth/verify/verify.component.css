@@ -1,17 +1,17 @@
-.auth-actions{
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
+.auth-actions {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
 }
 
-.auth-links{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.auth-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.error{
-    position: absolute;
-    top: 45%;
-    left: 45%;
+.error {
+  position: absolute;
+  top: 45%;
+  left: 45%;
 }

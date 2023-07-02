@@ -52,4 +52,26 @@ export const resendVerifyEmail = createAction(
   props<{ email: string }>()
 );
 
+export const changeUsername = createAction(
+  '[Auth] Change Username',
+  props<{ username: string }>()
+);
+
+export const changePassword = createAction(
+  '[Auth] Change Password',
+  props<{ oldPassword: string; newPassword: string }>()
+);
+
+export const deleteAcc = createAction(
+  '[Auth] Delete Account',
+  props<{ password: string }>()
+);
+
+export const uploadImage = createAction(
+  '[Auth] Upload Image',
+  props<{ image: any }>()
+);
+
+export const deleteImage = createAction('[Auth] Delete Image');
+
 export const logout = createAction('[Auth] Logout');

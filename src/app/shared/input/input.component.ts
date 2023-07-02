@@ -13,4 +13,5 @@ export class InputComponent {
   @Input() control: FormControl = new FormControl('');
   @Input() placeholder: string = 'Input field';
   @Input() error: string = '';
+  hide = true;
 }

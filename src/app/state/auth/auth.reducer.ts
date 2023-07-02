@@ -13,6 +13,11 @@ import {
   forgotPasswordEmailFailure,
   forgotPasswordReset,
   resendVerifyEmail,
+  changeUsername,
+  changePassword,
+  uploadImage,
+  deleteImage,
+  deleteAcc,
 } from './auth.actions';
 import { state } from '@angular/animations';
 
@@ -145,6 +150,41 @@ export const authReducer = createReducer(
   }),
 
   on(resendVerifyEmail, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+
+  on(changeUsername, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+
+  on(changePassword, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+
+  on(uploadImage, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+
+  on(deleteImage, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+
+  on(deleteAcc, (state) => {
     return {
       ...state,
       loading: true,

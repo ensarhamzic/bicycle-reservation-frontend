@@ -1,0 +1,121 @@
+main {
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  gap: 20px;
+}
+
+.infoContainer {
+  display: flex;
+  padding: 20px;
+  width: 100%;
+}
+
+.mainNaslov {
+  margin: 3% 0;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.mainParagraf {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+  opacity: 0.4;
+}
+
+.line {
+  width: 100%;
+  height: 3px;
+  background-color: black;
+  margin: 20px 0;
+}
+
+.profileImage {
+  width: 100%;
+  width: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  gap: 10px;
+  margin-left: 5%;
+}
+
+.contentParagraf {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 20px 50px;
+}
+
+app-input {
+  width: 90%;
+}
+
+.seeMore {
+    padding: 0.7rem 1.7rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    min-width: 150px;
+    max-width: 270px;
+    background-color: #0e4f8b;
+    color: #fff;
+    cursor: pointer;
+  }
+
+.inputNaslov{
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    border-bottom: 3px solid black;
+    padding-bottom: 20px;
+    width: 90%;
+    padding-left: 20px;
+}
+
+.error{
+  position: absolute;
+  top: 45%;
+  left: 45%;
+}
+
+@media (max-width: 700px){
+    .infoContainer {
+        flex-direction: column;
+    }
+    .contentContainer {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 5%;
+    }
+}
+
+@media (max-width: 500px){
+    .mainNaslov {
+        font-size: 3rem;
+    }
+    .mainParagraf {
+        font-size: 1.2rem;
+    }
+    .contentParagraf {
+        font-size: 1rem;
+    }
+    .profileImage {
+        width: 150px;
+    }
+}

@@ -16,6 +16,11 @@ import {
   forgotPasswordEmailFailure,
   forgotPasswordReset,
   resendVerifyEmail,
+  changeUsername,
+  changePassword,
+  uploadImage,
+  deleteImage,
+  deleteAcc,
 } from './auth.actions';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -146,6 +151,92 @@ export class AuthEffects {
           ),
           tap(() => {
             this.toastr.success('Successfully Send!');
+          }),
+          catchError(({ error }) =>
+            of(forgotPasswordEmailFailure({ error: error.error }))
+          )
+        )
+      )
+    );
+  });
+
+  changeUsername$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(changeUsername),
+      switchMap(({ username }) =>
+        this.authService.changeUsername(username).pipe(
+          map((data) => authSuccess({ data })),
+          tap(() => {
+            this.toastr.success('Successfully changed username!');
+          }),
+          catchError(({ error }) =>
+            of(forgotPasswordEmailFailure({ error: error.error }))
+          )
+        )
+      )
+    );
+  });
+
+  changePassword$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(changePassword),
+      switchMap(({ oldPassword, newPassword }) =>
+        this.authService.changePassword(oldPassword, newPassword).pipe(
+          map((data) => authSuccess({ data })),
+          tap(() => {
+            this.toastr.success('Successfully changed password!');
+          }),
+          catchError(({ error }) =>
+            of(forgotPasswordEmailFailure({ error: error.error }))
+          )
+        )
+      )
+    );
+  });
+
+  uploadImage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(uploadImage),
+      switchMap(({ image }) =>
+        this.authService.uploadImage(image).pipe(
+          map((data) => authSuccess({ data })),
+          tap(() => {
+            this.toastr.success('Successfully uploaded image!');
+          }),
+          catchError(({ error }) =>
+            of(forgotPasswordEmailFailure({ error: error.error }))
+          )
+        )
+      )
+    );
+  });
+
+  deleteImage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(deleteImage),
+      switchMap(() =>
+        this.authService.deleteImage().pipe(
+          map((data) => authSuccess({ data })),
+          tap(() => {
+            this.toastr.success('Successfully deleted image!');
+          }),
+          catchError(({ error }) =>
+            of(forgotPasswordEmailFailure({ error: error.error }))
+          )
+        )
+      )
+    );
+  });
+
+  deleteAcc$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(deleteAcc),
+      switchMap(({password}) =>
+        this.authService.deleteAccount(password).pipe(
+          map((data) => logout()),
+          tap(() => {
+            this.toastr.success('Successfully deleted account!');
+            this.router.navigate(['/login']);
           }),
           catchError(({ error }) =>
             of(forgotPasswordEmailFailure({ error: error.error }))

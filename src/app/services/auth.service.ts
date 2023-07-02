@@ -23,7 +23,11 @@ export class AuthService {
   };
 
   checktoken = (token: string): Observable<IAuth> => {
-    return this.http.post<IAuth>(`${environment.apiUrl}/auth/check`, { token });
+    return this.http.get<IAuth>(`${environment.apiUrl}/auth/check-token`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
   verify = (token: string, email: string): Observable<IAuth> => {
@@ -31,17 +35,98 @@ export class AuthService {
       token,
       email,
     });
-  }
+  };
 
   resendVerifyEmail = (email: string): Observable<any> => {
-    return this.http.post<any>(`${environment.apiUrl}/Auth/resend-verification-token`, { email });
-  }
+    return this.http.post<any>(
+      `${environment.apiUrl}/Auth/resend-verification-token`,
+      { email }
+    );
+  };
 
   forgotPasswordEmail = (email: string): Observable<any> => {
-    return this.http.post<any>(`${environment.apiUrl}/Auth/forgot-password`, { email });
-  }
+    return this.http.post<any>(`${environment.apiUrl}/Auth/forgot-password`, {
+      email,
+    });
+  };
 
-  forgotPasswordReset = (token: string, password: string, email: string): Observable<any> => {
-    return this.http.post<any>(`${environment.apiUrl}/Auth/reset-password`, { token, password, email });
-  }
+  forgotPasswordReset = (
+    token: string,
+    password: string,
+    email: string
+  ): Observable<any> => {
+    return this.http.post<any>(`${environment.apiUrl}/Auth/reset-password`, {
+      token,
+      password,
+      email,
+    });
+  };
+
+  changePassword = (
+    oldPassword: string,
+    newPassword: string
+  ): Observable<any> => {
+    return this.http.post<any>(
+      `${environment.apiUrl}/User/change-password`,
+      {
+        oldPassword,
+        newPassword,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
+  };
+
+  changeUsername = (username: string): Observable<any> => {
+    return this.http.post<any>(
+      `${environment.apiUrl}/User/change-username`,
+      {
+        username,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
+  };
+
+  deleteAccount = (password: string): Observable<any> => {
+    return this.http.post<any>(
+      `${environment.apiUrl}/User/delete-account`,
+      {
+        password,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
+  };
+
+  uploadImage = (image: any): Observable<any> => {
+    const formData = new FormData();
+    formData.append('ProfileImage', image);
+    return this.http.post<any>(
+      `${environment.apiUrl}/User/upload-image`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
+  };
+
+  deleteImage = (): Observable<any> => {
+    return this.http.delete<any>(`${environment.apiUrl}/User/delete-image`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+  };
 }
