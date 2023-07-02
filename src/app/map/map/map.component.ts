@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IStation } from 'src/app/shared/models/station.model';
 
 @Component({
   selector: 'app-map',
@@ -6,6 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./map.component.css'],
 })
 export class MapComponent {
+  @Output() mapClick: EventEmitter<google.maps.MapMouseEvent> =
+    new EventEmitter();
+  @Output() markerClick: EventEmitter<number> = new EventEmitter();
+  @Input() stations: IStation[] = [];
+  @Input() tempMarker: { lat: number; lng: number } | null = null;
+
   mapWidth = '100%';
   mapHeight = '100%';
   mapOptions: google.maps.MapOptions = {
@@ -31,18 +38,27 @@ export class MapComponent {
     scaledSize: new google.maps.Size(30, 30),
   };
 
+  stationIcon: google.maps.Icon = {
+    url: '../../../assets/station-marker.png',
+    scaledSize: new google.maps.Size(40, 40),
+  };
+
   markerOptions: google.maps.MarkerOptions = {
+    icon: this.stationIcon,
+  };
+
+  tempMarkerOptions: google.maps.MarkerOptions = {
     icon: this.markerIcon,
   };
 
   constructor() {}
 
   onMapClick(event: google.maps.MapMouseEvent) {
-    event.stop(); // prevents map icon click event
-    console.log(event.latLng?.toJSON()); // coordinates
+    event.stop(); // prevents default click behaviour
+    this.mapClick.emit(event);
   }
 
-  onMarkerClick(event: string) {
-    console.log(event);
+  onMarkerClick(stanicaId: number) {
+    this.markerClick.emit(stanicaId);
   }
 }

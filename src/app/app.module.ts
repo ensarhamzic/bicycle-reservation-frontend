@@ -13,11 +13,14 @@ import { authReducer } from './state/auth/auth.reducer';
 import { AuthEffects } from './state/auth/auth.effects';
 import { MapModule } from './map/map.module';
 import { NavComponent } from './nav/nav.component';
-import { AuthModule } from './user/auth/auth.module';
 import { UserModule } from './user/user.module';
+import { HomeComponent } from './home/home.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { StationAdminDialogComponent } from './admin/station-admin-dialog/station-admin-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent],
+  declarations: [AppComponent, NavComponent, HomeComponent, StationAdminDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,6 +33,8 @@ import { UserModule } from './user/user.module';
     EffectsModule.forRoot([AuthEffects]),
     MapModule,
     UserModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

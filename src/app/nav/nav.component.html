@@ -2,13 +2,13 @@
   <a routerLink="/" class="logo">
     <img src="../../assets/logo-blue.png" alt="logo" />
   </a>
-  <button class="menu-btn" id="open-nav" (click)="toggleNav()">
+  <button class="menu-btn" id="open-nav" (click)="hidden = !hidden">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path d="M16 18V20H5V18H16ZM21 11V13H3V11H21ZM19 4V6H8V4H19Z"></path>
     </svg>
   </button>
 </header>
-<nav [class.hide]="hidden" (click)="toggleNav()">
+<nav [class.hide]="hidden" (click)="hidden = !hidden">
   <a id="close-nav" class="close-button">X</a>
   <a routerLink="login" *ngIf="!loggedIn">Login</a>
   <a routerLink="register" *ngIf="!loggedIn">Register</a>

@@ -14,14 +14,13 @@
           [error]="tokenError"
         ></app-input>
         <button
-        mat-stroked-button
-        color="accent"
-        [disabled]="loading$ | async"
-        (click)="resend()"
-        [disabled]="disabled"
-      >
-        {{showValue}}
-      </button>
+          mat-stroked-button
+          color="accent"
+          [disabled]="loading$ | async"
+          (click)="resend()"
+        >
+          {{ showValue }}
+        </button>
       </form>
       <mat-error *ngIf="error$ | async as error">{{ error }}</mat-error>
     </mat-card-content>
