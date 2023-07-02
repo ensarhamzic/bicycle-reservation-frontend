@@ -14,9 +14,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { StationAdminDialogComponent } from './admin/station-admin-dialog/station-admin-dialog.component';
 
 @NgModule({
-  declarations: [AddStationComponent],
+  declarations: [AddStationComponent, StationAdminDialogComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
