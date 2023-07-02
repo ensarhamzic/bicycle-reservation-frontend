@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddStationComponent } from '../user/admin/add-station/add-station.component';
 import { IStation } from '../shared/models/station.model';
 import { StationService } from '../services/station.service';
+import { StationAdminDialogComponent } from '../user/admin/station-admin-dialog/station-admin-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -53,6 +54,12 @@ export class HomeComponent {
   }
 
   markerClickHandler(stanicaId: number) {
-    console.log(stanicaId);
+    // if (this.role === 'Admin') {
+    this.dialog.open(StationAdminDialogComponent, {
+      enterAnimationDuration: 200,
+      exitAnimationDuration: 200,
+      data: stanicaId,
+    });
+    // }
   }
 }

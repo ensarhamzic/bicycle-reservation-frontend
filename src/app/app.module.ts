@@ -17,10 +17,9 @@ import { UserModule } from './user/user.module';
 import { HomeComponent } from './home/home.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { StationAdminDialogComponent } from './admin/station-admin-dialog/station-admin-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, HomeComponent, StationAdminDialogComponent],
+  declarations: [AppComponent, NavComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
