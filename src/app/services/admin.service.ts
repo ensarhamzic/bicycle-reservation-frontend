@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { IStation } from '../shared/models/station.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
+import { IBicycle } from '../shared/models/bicycle.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,25 @@ export class AdminService {
   }): Observable<IStation> => {
     return this.http.post<IStation>(
       `${environment.apiUrl}/admin/stations`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      }
+    );
+  };
+
+  addBicycle = (
+    stationId: number,
+    data: {
+      id: string;
+      naziv: string;
+      type: string;
+    }
+  ): Observable<IBicycle> => {
+    return this.http.post<IBicycle>(
+      `${environment.apiUrl}/admin/stations/${stationId}`,
       data,
       {
         headers: {

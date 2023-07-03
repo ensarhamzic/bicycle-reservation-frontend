@@ -1,18 +1,67 @@
-<div class="add-station-dialog" *ngIf="station">
-  <h1 mat-dialog-title>{{ station.name }}</h1>
-  <div mat-dialog-content class="dialog-content">
-    <div *ngFor="let bicycle of bicycles"></div>
-    <!-- <form [formGroup]="form">
-      <app-input
-        title="Station Name"
-        placeholder="Station Name"
-        [control]="name"
-        [error]="nameError"
-      ></app-input>
-    </form> -->
+<div class="dialog">
+  <ng-container *ngIf="station">
+    <h1 mat-dialog-title>{{ station.name }}</h1>
+    <div mat-dialog-content class="dialog-content">
+      <form *ngIf="addBicycleMode" [formGroup]="form">
+        <app-input
+          title="Bicycle unique ID"
+          placeholder="Bicycle unique ID"
+          [control]="id"
+          [error]="idError"
+        ></app-input>
+        <app-input
+          title="Naziv"
+          placeholder="Naziv"
+          [control]="naziv"
+          [error]="nazivError"
+        ></app-input>
+        <mat-form-field>
+          <mat-label>Bicycle type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let bType of bicyleTypes" [value]="bType">
+              {{ bType }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error *ngIf="typeError">{{ typeError }}</mat-error>
+      </form>
+      <button mat-raised-button (click)="addBicycleMode = !addBicycleMode">
+        {{ addBicycleMode ? "Cancel" : "Add Bicycle" }}
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="addBicycle()"
+        *ngIf="addBicycleMode"
+        class="addButton"
+        [disabled]="!form.valid || loading"
+      >
+        Add Bicycle
+      </button>
+      <mat-error *ngIf="error">{{ error }}</mat-error>
+      <div class="bicycle-list" *ngIf="bicycles.length > 0">
+        <mat-card class="bicycle" *ngFor="let bicycle of bicycles">
+          <mat-card-header class="bicyle-card-content">
+            <mat-card-subtitle>id: {{ bicycle.id }}</mat-card-subtitle>
+            <mat-card-subtitle>type: {{ bicycle.type }}</mat-card-subtitle>
+            <mat-divider></mat-divider>
+            <mat-card-title>{{ bicycle.naziv }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>code: {{ bicycle.lockCode }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div *ngIf="bicycles.length === 0 && !loading">
+        <p>No bicycles</p>
+      </div>
+    </div>
+  </ng-container>
+  <div *ngIf="!station" class="spinner">
+    <mat-spinner></mat-spinner>
   </div>
   <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button cdkFocusInitial>Add</button>
+    <button mat-button mat-dialog-close>Close</button>
+    <!-- <button mat-button cdkFocusInitial>Add</button> -->
   </div>
 </div>

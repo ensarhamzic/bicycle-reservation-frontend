@@ -1,0 +1,27 @@
+form {
+  margin-top: 30px;
+}
+
+.addButton {
+  margin-left: 20px;
+}
+
+.bicycle-list {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+  gap: 10px;
+}
+
+.bicycle {
+  width: 150px !important;
+}
+
+.spinner {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

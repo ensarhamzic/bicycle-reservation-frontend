@@ -54,12 +54,12 @@ export class HomeComponent {
   }
 
   markerClickHandler(stanicaId: number) {
-    // if (this.role === 'Admin') {
-    this.dialog.open(StationAdminDialogComponent, {
-      enterAnimationDuration: 200,
-      exitAnimationDuration: 200,
-      data: stanicaId,
-    });
-    // }
+    if (this.role === 'Admin') {
+      this.dialog.open(StationAdminDialogComponent, {
+        enterAnimationDuration: 200,
+        exitAnimationDuration: 200,
+        data: stanicaId,
+      });
+    }
   }
 }

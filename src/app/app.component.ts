@@ -9,13 +9,11 @@ import { checkToken } from './state/auth/auth.actions';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  loggedIn$ = this.store.select((state) => state.auth.loggedIn);
   token = localStorage.getItem('token') || '';
 
   constructor(private store: Store<AppState>) {}
 
-
-  ngOnInit(){
-    this.store.dispatch(checkToken({token: this.token}));
+  ngOnInit() {
+    this.token && this.store.dispatch(checkToken({ token: this.token }));
   }
 }

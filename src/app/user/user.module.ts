@@ -16,6 +16,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { StationAdminDialogComponent } from './admin/station-admin-dialog/station-admin-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AddStationComponent, StationAdminDialogComponent],
@@ -32,6 +34,8 @@ import { StationAdminDialogComponent } from './admin/station-admin-dialog/statio
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
   ],
   exports: [AddStationComponent],
 })

@@ -36,3 +36,29 @@ body {
     width: 90%;
   }
 }
+
+.dialog {
+  width: 800px;
+}
+
+.dialog-content {
+  padding: 20px;
+}
+
+@media screen and (max-width: 800px) {
+  .dialog {
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dialog {
+    width: 450px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .dialog {
+    width: 300px;
+  }
+}
