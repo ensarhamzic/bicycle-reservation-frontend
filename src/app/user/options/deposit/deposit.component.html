@@ -1,0 +1,31 @@
+
+<mat-card class="auth-card">
+    <mat-card-header class="auth-header">
+      <mat-card-subtitle>Ride a bike!</mat-card-subtitle>
+      <mat-card-title>Deposit your Credits</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-divider></mat-divider>
+      <form [formGroup]="forms">
+        <app-input
+          title="Amount"
+          placeholder="Amount"
+          [control]="amount"
+          [error]="amountError"
+        ></app-input>
+      </form>
+      <mat-error *ngIf="error$ | async as error">{{ error }}</mat-error>
+    </mat-card-content>
+    <mat-card-actions class="auth-actions">
+      <button
+        mat-stroked-button
+        color="primary"
+        [disabled]="loading$ | async"
+        (click)="deposit()"
+        class="seeMore"
+      >
+        Deposit
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  

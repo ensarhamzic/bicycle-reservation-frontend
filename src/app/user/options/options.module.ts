@@ -6,10 +6,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DepositComponent } from './deposit/deposit.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
-    UsersPageComponent
+    UsersPageComponent,
+    DepositComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +23,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     SharedModule,
     MatDialogModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatDividerModule,
+    MatListModule
   ]
 })
 export class OptionsModule { }

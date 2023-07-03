@@ -9,5 +9,5 @@ export interface IUser {
   imageUrl: string | null;
   role: UserRole;
   verified: boolean;
-  credit: number;
+  credits: number;
 }

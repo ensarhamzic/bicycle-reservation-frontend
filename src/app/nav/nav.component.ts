@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { logout } from '../state/auth/auth.actions';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -12,7 +12,7 @@ export class NavComponent {
   hidden = true;
   loggedIn$ = this.store.select((state) => state.auth.loggedIn);
   loggedIn = false;
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private router: Router) {
     this.loggedIn$.subscribe((loggedIn) => {
       this.loggedIn = loggedIn;
     });
@@ -23,5 +23,6 @@ export class NavComponent {
 
   logout(){
     this.store.dispatch(logout());
+    this.router.navigate(['/login']);
   }
 }
