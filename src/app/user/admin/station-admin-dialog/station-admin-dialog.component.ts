@@ -1,13 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
 import { AdminService } from 'src/app/services/admin.service';
 import { StationService } from 'src/app/services/station.service';
 import { BicycleType } from 'src/app/shared/enums/bicycle-type.enum';
 import { IBicycle } from 'src/app/shared/models/bicycle.model';
 import { IStation } from 'src/app/shared/models/station.model';
-import { AppState } from 'src/app/state/app.state';
 
 @Component({
   selector: 'app-station-admin-dialog',
