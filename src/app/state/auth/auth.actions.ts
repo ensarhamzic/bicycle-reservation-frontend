@@ -72,6 +72,11 @@ export const uploadImage = createAction(
   props<{ image: any }>()
 );
 
+export const deposit = createAction(
+  '[Auth] Deposit',
+  props<{ amount: number }>()
+);
+
 export const deleteImage = createAction('[Auth] Delete Image');
 
 export const logout = createAction('[Auth] Logout');

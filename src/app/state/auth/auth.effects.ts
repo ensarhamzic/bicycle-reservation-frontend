@@ -21,6 +21,7 @@ import {
   uploadImage,
   deleteImage,
   deleteAcc,
+  deposit,
 } from './auth.actions';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -231,12 +232,29 @@ export class AuthEffects {
   deleteAcc$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(deleteAcc),
-      switchMap(({password}) =>
+      switchMap(({ password }) =>
         this.authService.deleteAccount(password).pipe(
           map((data) => logout()),
           tap(() => {
             this.toastr.success('Successfully deleted account!');
             this.router.navigate(['/login']);
+          }),
+          catchError(({ error }) =>
+            of(forgotPasswordEmailFailure({ error: error.error }))
+          )
+        )
+      )
+    );
+  });
+
+  deposit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(deposit),
+      switchMap(({ amount }) =>
+        this.authService.deposit(amount).pipe(
+          map((data) => authSuccess({ data })),
+          tap(() => {
+            this.toastr.success('Successfully deposited!');
           }),
           catchError(({ error }) =>
             of(forgotPasswordEmailFailure({ error: error.error }))

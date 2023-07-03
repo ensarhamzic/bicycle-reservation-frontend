@@ -129,4 +129,18 @@ export class AuthService {
       },
     });
   };
+
+  deposit = (amount: number): Observable<any> => {
+    return this.http.post<any>(
+      `${environment.apiUrl}/User/deposit-credits`,
+      {
+        credits: amount,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
+  }
 }

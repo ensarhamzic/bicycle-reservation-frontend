@@ -18,6 +18,7 @@ import {
   uploadImage,
   deleteImage,
   deleteAcc,
+  deposit,
 } from './auth.actions';
 import { state } from '@angular/animations';
 
@@ -187,6 +188,13 @@ export const authReducer = createReducer(
   }),
 
   on(deleteAcc, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+
+  on(deposit, (state) => {
     return {
       ...state,
       loading: true,

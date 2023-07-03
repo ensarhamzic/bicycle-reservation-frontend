@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
+import { deposit } from 'src/app/state/auth/auth.actions';
 
 @Component({
   selector: 'app-deposit',
@@ -12,14 +13,20 @@ import { AppState } from 'src/app/state/app.state';
 })
 export class DepositComponent {
   forms = new FormGroup({});
-  amount = new FormControl('', [Validators.required, Validators.minLength(1)]);
-
+  // amount = new FormControl('', [Validators.required, Validators.minLength(1)]);//it needs to be a number
+  amount = new FormControl('', [
+    Validators.required,
+    Validators.minLength(1),
+    Validators.pattern('^[0-9]*$'),
+  ]);
+  amountInNum = Number(this.amount.value);
   constructor(private store: Store<AppState>) {}
 
   get amountError() {
     if (this.amount.hasError('required')) return 'Amount is required';
     if (this.amount.hasError('minlength'))
       return 'Amount must be at least 1 characters long';
+    if (this.amount.hasError('pattern')) return 'Amount must be a number';
     return '';
   }
 
@@ -28,8 +35,9 @@ export class DepositComponent {
 
   deposit() {
     if (this.amount.valid) {
-      this.store.dispatch({ type: 'DEPOSIT', payload: this.amount.value });
-      // this.amount.reset();
+      this.amountInNum = Number(this.amount.value);
+      this.store.dispatch(deposit({ amount: this.amountInNum }));
+      this.amount.reset();
     }
   }
 }
