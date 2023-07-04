@@ -28,7 +28,6 @@ import { AdminTabComponent } from './admin/admin-tab/admin-tab.component';
     StationAdminDialogComponent,
     StationClientDialogComponent,
     MyRentsComponent,
-    ,
     AdminTabComponent,
   ],
   imports: [

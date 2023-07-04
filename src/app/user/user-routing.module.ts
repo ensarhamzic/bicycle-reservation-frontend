@@ -19,6 +19,16 @@ const routes: Routes = [
     component: DepositComponent,
     canActivate: [loggedInGuard],
   },
+  {
+    path: 'my-rents',
+    component: MyRentsComponent,
+    canActivate: [isClientGuard],
+  },
+  {
+    path: 'adminTab',
+    component: AdminTabComponent,
+    canActivate: [isAdmin],
+  },
 ];
 
 @NgModule({

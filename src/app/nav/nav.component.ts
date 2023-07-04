@@ -15,10 +15,7 @@ export class NavComponent {
   role: UserRole = null;
   loggedIn$ = this.store.select((state) => state.auth.loggedIn);
   loggedIn = false;
-  role$ = this.store.select((state) => state.auth.user.role);
-  role: UserRole = null;
   constructor(private store: Store<AppState>, private router: Router) {
-    
     this.loggedIn$.subscribe((loggedIn) => {
       this.loggedIn = loggedIn;
     });
