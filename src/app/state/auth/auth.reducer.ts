@@ -21,6 +21,7 @@ import {
   deposit,
 } from './auth.actions';
 import { state } from '@angular/animations';
+import { rentBicycleSuccess } from '../user/user.actions';
 
 export interface AuthState {
   loading: boolean;
@@ -198,6 +199,16 @@ export const authReducer = createReducer(
     return {
       ...state,
       loading: true,
+    };
+  }),
+
+  on(rentBicycleSuccess, (state, { balance }) => {
+    return {
+      ...state,
+      user: {
+        ...state.user,
+        credits: balance,
+      },
     };
   })
 );

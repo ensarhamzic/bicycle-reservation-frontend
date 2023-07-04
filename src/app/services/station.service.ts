@@ -24,16 +24,19 @@ export class StationService {
     return this.http.get<IStation[]>(`${environment.apiUrl}/station`);
   }
 
-  getStation(
-    id: number
-  ): Observable<{ station: IStation; bicycles: IBicycle[] }> {
-    return this.http.get<{ station: IStation; bicycles: IBicycle[] }>(
-      `${environment.apiUrl}/station/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
-      }
-    );
+  getStation(id: number): Observable<{
+    station: IStation;
+    bicycles: IBicycle[];
+    hasRentedBike: boolean;
+  }> {
+    return this.http.get<{
+      station: IStation;
+      bicycles: IBicycle[];
+      hasRentedBike: boolean;
+    }>(`${environment.apiUrl}/station/${id}`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    });
   }
 }

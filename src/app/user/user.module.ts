@@ -19,9 +19,10 @@ import { StationAdminDialogComponent } from './admin/station-admin-dialog/statio
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StationClientDialogComponent } from './client/station-client-dialog/station-client-dialog.component';
+import { MyRentedBicyleComponent } from './client/my-rented-bicyle/my-rented-bicyle.component';
 
 @NgModule({
-  declarations: [AddStationComponent, StationAdminDialogComponent, StationClientDialogComponent],
+  declarations: [AddStationComponent, StationAdminDialogComponent, StationClientDialogComponent, MyRentedBicyleComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

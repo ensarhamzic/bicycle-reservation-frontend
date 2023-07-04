@@ -1,4 +1,4 @@
-<mat-form-field appearance="outline" class="input" *ngIf="type === 'text'">
+<mat-form-field appearance="outline" class="input" *ngIf="type !== 'password'">
   <mat-label>{{ title }}</mat-label>
   <input
     matInput
@@ -12,20 +12,20 @@
 
 <mat-form-field appearance="outline" class="input" *ngIf="type === 'password'">
   <mat-label>{{ title }}</mat-label>
-    <input
-      matInput
-      [type]="hide ? 'password' : 'text'"
-      [placeholder]="placeholder"
-      [formControl]="control"
-    />
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="hide = !hide"
-      [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hide"
-    >
-      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-    </button>
+  <input
+    matInput
+    [type]="hide ? 'password' : 'text'"
+    [placeholder]="placeholder"
+    [formControl]="control"
+  />
+  <button
+    mat-icon-button
+    matSuffix
+    (click)="hide = !hide"
+    [attr.aria-label]="'Hide password'"
+    [attr.aria-pressed]="hide"
+  >
+    <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+  </button>
   <mat-error *ngIf="control.invalid">{{ error }}</mat-error>
 </mat-form-field>
