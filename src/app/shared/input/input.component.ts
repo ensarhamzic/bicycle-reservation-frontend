@@ -13,5 +13,6 @@ export class InputComponent {
   @Input() control: FormControl = new FormControl('');
   @Input() placeholder: string = 'Input field';
   @Input() error: string = '';
+  @Input() required: boolean = true;
   hide = true;
 }
