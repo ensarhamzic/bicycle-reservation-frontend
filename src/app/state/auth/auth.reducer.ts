@@ -21,6 +21,7 @@ import {
   deposit,
 } from './auth.actions';
 import { state } from '@angular/animations';
+import { UserRole } from 'src/app/shared/types/user-role.type';
 
 export interface AuthState {
   loading: boolean;
@@ -39,11 +40,11 @@ export const initialState: AuthState = {
     username: '',
     email: '',
     imageUrl: null,
-    role: null,
+    role: localStorage.getItem('role') as UserRole || null,
     verified: false,
     credits: 0,
   },
-  token: '',
+  token: localStorage.getItem('token') || '',
   loggedIn: !!localStorage.getItem('token'),
   error: null,
 };

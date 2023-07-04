@@ -12,6 +12,8 @@
   <a id="close-nav" class="close-button">X</a>
   <a routerLink="login" *ngIf="!loggedIn">Login</a>
   <a routerLink="register" *ngIf="!loggedIn">Register</a>
+  <a routerLink="deposit" *ngIf="loggedIn">Deposit Credits</a>
+  <a routerLink="adminTab" *ngIf="role === 'Admin'">Admin Tab</a>
   <a routerLink="userInfo" *ngIf="loggedIn">Profile</a>
   <a (click)="logout()" *ngIf="loggedIn">Log Out</a>
 </nav>

@@ -5,7 +5,7 @@
     [placeholder]="placeholder"
     [formControl]="control"
     [type]="type"
-    required
+    [required]="required"
   />
   <mat-error *ngIf="control.invalid">{{ error }}</mat-error>
 </mat-form-field>

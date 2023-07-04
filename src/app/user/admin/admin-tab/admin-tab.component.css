@@ -1,0 +1,74 @@
+mat-card {
+  border: 1px solid black;
+  margin: 10px;
+}
+
+mat-card-actions {
+  gap: 10px;
+}
+
+button {
+  margin-right: 8px;
+}
+
+.profileImage {
+  width: 30px;
+}
+
+p {
+  font-size: large;
+}
+
+mat-card-title {
+  font-size: larger;
+}
+
+mat-divider {
+  margin: 10px;
+}
+
+h1 {
+  padding: 10px;
+  font-size: 30px;
+}
+
+app-input {
+  margin: 10px 0;
+  width: 90%;
+}
+
+.searchButton {
+  padding: 0.7rem 1.7rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  min-width: 150px;
+  max-width: 270px;
+  background-color: #0e4f8b;
+  color: #fff;
+  cursor: pointer;
+  width: 5%;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.inputContainer {
+  padding: 20px;
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 376px) {
+  p {
+    font-size: 13px;
+  }
+}
+
+.example-additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}

@@ -1,0 +1,52 @@
+<div [class]="isLoading ? 'error' : ''">
+  <mat-card>
+    <!-- <h1>Admin Tab</h1> -->
+
+    <div class="inputContainer">
+      <app-input
+        title="Search by username"
+        placeholder="username"
+        [control]="query"
+        [required]="false"
+      ></app-input>
+      <button class="searchButton" (click)="search()">Search</button>
+    </div>
+    <mat-card-content>
+      <mat-card *ngFor="let user of filteredUsers" class="contentCard">
+        <mat-card-header>
+          <mat-card-title style="font-size: x-large">
+            <img src="assets/default-profle.jpeg" alt="" class="profileImage" />
+            {{ user.username }}
+          </mat-card-title>
+          <mat-card-subtitle style="font-size: large"
+            >{{ user.firstName }} {{ user.lastName }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <p>Role: {{ user.role }}</p>
+          <p>Credits: {{ user.credits }}</p>
+          <p>Email: {{ user.email }}</p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button
+            mat-button
+            class="promote"
+            style="color: white; background-color: blue"
+            (click)="openDialog('0ms', '0ms', 0, user.id ,user.role || null)"
+          >
+            PROMOTE
+          </button>
+          <button
+            mat-button
+            class="delete"
+            style="color: white; background-color: red"
+            (click)="openDialog('0ms', '0ms', 1, user.id, user.role)"
+          >
+            DELETE
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>
