@@ -8,4 +8,5 @@ export interface IRecord {
   endStation: IStation;
   numberOfHours: number;
   startDate: Date;
+  costPerHour: number;
 }

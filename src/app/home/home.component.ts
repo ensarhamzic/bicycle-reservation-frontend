@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { UserRole } from '../shared/types/user-role.type';
@@ -14,9 +14,14 @@ import { StationClientDialogComponent } from '../user/client/station-client-dial
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   role$ = this.store.select((state) => state.auth.user.role);
   role: UserRole = null;
+
+  userCords: { lat: number; lng: number } = {
+    lat: 0,
+    lng: 0,
+  };
 
   dialogOptions: MatDialogConfig = {
     enterAnimationDuration: 200,
@@ -38,6 +43,10 @@ export class HomeComponent {
     this.stationService.getStations().subscribe((data) => {
       this.stations = data;
     });
+  }
+
+  ngOnInit(): void {
+    this.getLocation();
   }
 
   mapClickHandler(event: google.maps.MapMouseEvent) {
@@ -69,6 +78,24 @@ export class HomeComponent {
         ...this.dialogOptions,
         data: stanicaId,
       });
+    }
+  }
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          if (position) {
+            this.userCords = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+          }
+        },
+        (error) => console.log(error)
+      );
+    } else {
+      alert('Geolocation is not supported by this browser.');
     }
   }
 }

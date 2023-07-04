@@ -40,7 +40,7 @@ export class AdminService {
     stationId: number,
     data: {
       id: string;
-      naziv: string;
+      name: string;
       type: string;
     }
   ): Observable<IBicycle> => {

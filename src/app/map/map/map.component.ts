@@ -12,6 +12,7 @@ export class MapComponent {
   @Output() markerClick: EventEmitter<number> = new EventEmitter();
   @Input() stations: IStation[] = [];
   @Input() tempMarker: { lat: number; lng: number } | null = null;
+  @Input() userCords: { lat: number; lng: number } = { lat: 0, lng: 0 };
 
   mapWidth = '100%';
   mapHeight = '90vh';
@@ -43,8 +44,17 @@ export class MapComponent {
     scaledSize: new google.maps.Size(40, 40),
   };
 
+  userMarkerIcon: google.maps.Icon = {
+    url: '../../../assets/user-marker.png',
+    scaledSize: new google.maps.Size(40, 40),
+  };
+
   markerOptions: google.maps.MarkerOptions = {
     icon: this.stationIcon,
+  };
+
+  userMarkerOptions: google.maps.MarkerOptions = {
+    icon: this.userMarkerIcon,
   };
 
   tempMarkerOptions: google.maps.MarkerOptions = {

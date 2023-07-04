@@ -5,6 +5,12 @@
   (mapClick)="onMapClick($event)"
 >
   <map-marker
+    *ngIf="userCords"
+    [position]="userCords"
+    [options]="userMarkerOptions"
+  ></map-marker>
+
+  <map-marker
     *ngFor="let station of stations"
     (mapClick)="onMarkerClick(station.id)"
     [position]="{ lat: station.lat, lng: station.lng }"

@@ -94,6 +94,14 @@ export class StationClientDialogComponent {
     });
   }
 
+  returnBike() {
+    if (!this.station) return;
+    this.clientService.returnBicycle(this.station.id).subscribe(() => {
+      this.toastr.success('You have successfully returned a bicycle');
+      this.dialogRef.close();
+    });
+  }
+
   get numberOfHoursError() {
     if (this.numberOfHours.hasError('required')) {
       return 'You must enter a value';

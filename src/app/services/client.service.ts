@@ -34,8 +34,22 @@ export class ClientService {
     );
   }
 
-  getRentedBicycle(): Observable<IRecord> {
-    return this.http.get<IRecord>(`${environment.apiUrl}/client/rented`, {
+  returnBicycle(stationId: number): Observable<string> {
+    return this.http.post<string>(
+      `${environment.apiUrl}/client/return`,
+      {
+        stationId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      }
+    );
+  }
+
+  getRents(): Observable<IRecord[]> {
+    return this.http.get<IRecord[]>(`${environment.apiUrl}/client/rented`, {
       headers: {
         Authorization: `Bearer ${this.token}`,
       },

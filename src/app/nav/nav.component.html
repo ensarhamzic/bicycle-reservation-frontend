@@ -13,6 +13,6 @@
   <a routerLink="login" *ngIf="!loggedIn">Login</a>
   <a routerLink="register" *ngIf="!loggedIn">Register</a>
   <a routerLink="userInfo" *ngIf="loggedIn">Profile</a>
-  <a routerLink="my-rent" *ngIf="(role$ | async) === 'Client'">My Rent</a>
+  <a routerLink="my-rents" *ngIf="(role$ | async) === 'Client'">My Rents</a>
   <a (click)="logout()" *ngIf="loggedIn">Log Out</a>
 </nav>

@@ -7,7 +7,7 @@
           <mat-card-header class="bicyle-card-content">
             <mat-card-subtitle>type: {{ bicycle.type }}</mat-card-subtitle>
             <mat-divider></mat-divider>
-            <mat-card-title>{{ bicycle.naziv }}</mat-card-title>
+            <mat-card-title>{{ bicycle.name }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <button
@@ -58,5 +58,14 @@
 
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Close</button>
+    <button
+      mat-button
+      mat-raised-button
+      color="primary"
+      *ngIf="hasRentedBike"
+      (click)="returnBike()"
+    >
+      Return Bike
+    </button>
   </div>
 </div>

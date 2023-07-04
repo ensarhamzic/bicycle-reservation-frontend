@@ -16,6 +16,10 @@
         <div class="line"></div>
         <p class="contentParagraf">Email: {{ user.email }}</p>
         <p class="contentParagraf">Role: {{ user.role }}</p>
+        <div *ngIf="user.role === 'Client'">
+          <p class="contentParagraf">Credits: {{ user.credits }}</p>
+          <a routerLink="/deposit">Deposit credits</a>
+        </div>
       </div>
     </div>
     <div class="line"></div>
@@ -63,5 +67,5 @@
       <button class="seeMore" (click)="deleteAcc()">Delete Account</button>
     </div>
   </div>
-    <mat-spinner *ngIf="loading$ | async"></mat-spinner>
+  <mat-spinner *ngIf="loading$ | async"></mat-spinner>
 </main>

@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { UsersPageComponent } from './options/users-page/users-page.component';
 import { loggedInGuard } from '../guards/logged-in.guard';
 import { DepositComponent } from './options/deposit/deposit.component';
-import { MyRentedBicyleComponent } from './client/my-rented-bicyle/my-rented-bicyle.component';
 import { isClientGuard } from '../guards/is-client.guard';
+import { MyRentsComponent } from './client/my-rents/my-rents.component';
 
 const routes: Routes = [
   {
@@ -18,8 +18,8 @@ const routes: Routes = [
     canActivate: [loggedInGuard],
   },
   {
-    path: 'my-rent',
-    component: MyRentedBicyleComponent,
+    path: 'my-rents',
+    component: MyRentsComponent,
     canActivate: [isClientGuard],
   },
 ];
