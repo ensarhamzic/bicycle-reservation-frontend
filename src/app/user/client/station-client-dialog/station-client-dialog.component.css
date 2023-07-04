@@ -1,11 +1,3 @@
-form {
-  margin-top: 30px;
-}
-
-.addButton {
-  margin-left: 20px;
-}
-
 .bicycle-list {
   padding: 20px;
   display: flex;
@@ -15,5 +7,8 @@ form {
 }
 
 .bicycle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 150px !important;
 }

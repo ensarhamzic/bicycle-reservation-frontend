@@ -1,0 +1,71 @@
+<div class="dialog">
+  <ng-container *ngIf="station && !selectedBicycleId">
+    <h1 mat-dialog-title>{{ station.name }}</h1>
+    <div mat-dialog-content class="dialog-content">
+      <div class="bicycle-list" *ngIf="bicycles.length > 0">
+        <mat-card class="bicycle" *ngFor="let bicycle of bicycles">
+          <mat-card-header class="bicyle-card-content">
+            <mat-card-subtitle>type: {{ bicycle.type }}</mat-card-subtitle>
+            <mat-divider></mat-divider>
+            <mat-card-title>{{ bicycle.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="enterRentMode(bicycle.id)"
+              class="addButton"
+              [disabled]="hasRentedBike"
+            >
+              Rent
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div *ngIf="bicycles.length === 0">
+        <p>No bicycles</p>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="selectedBicycleId">
+    <h1 mat-dialog-title>Rent bike</h1>
+    <div mat-dialog-content class="dialog-content">
+      <form [formGroup]="rentBikeForm">
+        <app-input
+          [control]="numberOfHours"
+          type="number"
+          placeholder="Number Of Hours"
+          title="Number Of Hours"
+          [error]="numberOfHoursError"
+        ></app-input>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="rentBicyle()"
+          [disabled]="!rentBikeForm.valid || rentingBike"
+          class="rentButton"
+        >
+          Rent Bicycle
+        </button>
+      </form>
+    </div>
+  </ng-container>
+
+  <div *ngIf="!station" class="station-dialog-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+    <button
+      mat-button
+      mat-raised-button
+      color="primary"
+      *ngIf="hasRentedBike"
+      (click)="returnBike()"
+    >
+      Return Bike
+    </button>
+  </div>
+</div>

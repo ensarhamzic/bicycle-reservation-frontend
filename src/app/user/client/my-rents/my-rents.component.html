@@ -1,0 +1,50 @@
+<mat-card class="auth-card">
+  <mat-card-header class="auth-header">
+    <mat-card-title>Currently rented bike</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+    <div *ngIf="!currentRecord && !loading">
+      <p>You don't have any rented bikes at the moment</p>
+    </div>
+    <div *ngIf="currentRecord">
+      <p>Bike ID: {{ currentRecord.bicycle.id }}</p>
+      <p>Bike Name: {{ currentRecord.bicycle.name }}</p>
+      <p>Bike Type: {{ currentRecord.bicycle.type }}</p>
+      <p>
+        Start time: {{ currentRecord.startDate | date : "YYYY/MM/dd hh:mm:ss" }}
+      </p>
+      <p>Lock Code: {{ currentRecord.bicycle.lockCode }}</p>
+      <p>Rented for: {{ currentRecord.numberOfHours }} hours</p>
+      <p>Took from: {{ currentRecord.startStation.name }}</p>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="auth-card">
+  <mat-card-header class="auth-header">
+    <mat-card-title>Previous rents</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+    <div *ngIf="records.length === 0 && !loading">
+      <p>You don't have rent bike history</p>
+    </div>
+    <ng-container *ngIf="records.length > 0">
+      <div *ngFor="let record of records">
+        <p>Bike ID: {{ record.bicycle.id }}</p>
+        <p>Bike Name: {{ record.bicycle.name }}</p>
+        <p>Bike Type: {{ record.bicycle.type }}</p>
+        <p>Start time: {{ record.startDate | date : "YYYY/MM/dd hh:mm:ss" }}</p>
+        <p>
+          Rented for: {{ record.numberOfHours }}
+          {{ record.numberOfHours === 1 ? "hour" : "hours" }}
+        </p>
+        <p>Took from: {{ record.startStation.name }}</p>
+        <p>Returned to: {{ record.endStation.name }}</p>
+        <p>Cost: {{ record.numberOfHours * record.costPerHour }}</p>
+        <mat-divider></mat-divider>
+      </div>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

@@ -22,6 +22,7 @@ import {
 } from './auth.actions';
 import { state } from '@angular/animations';
 import { UserRole } from 'src/app/shared/types/user-role.type';
+import { rentBicycleSuccess } from '../user/user.actions';
 
 export interface AuthState {
   loading: boolean;
@@ -40,7 +41,7 @@ export const initialState: AuthState = {
     username: '',
     email: '',
     imageUrl: null,
-    role: localStorage.getItem('role') as UserRole || null,
+    role: (localStorage.getItem('role') as UserRole) || null,
     verified: false,
     credits: 0,
   },
@@ -199,6 +200,16 @@ export const authReducer = createReducer(
     return {
       ...state,
       loading: true,
+    };
+  }),
+
+  on(rentBicycleSuccess, (state, { balance }) => {
+    return {
+      ...state,
+      user: {
+        ...state.user,
+        credits: balance,
+      },
     };
   })
 );

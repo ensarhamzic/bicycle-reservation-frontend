@@ -1,6 +1,6 @@
 export interface IBicycle {
   id: string;
-  naziv: string;
+  name: string;
   lockCode: string;
   type: string;
 }

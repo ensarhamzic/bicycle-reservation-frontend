@@ -22,7 +22,7 @@ export class StationAdminDialogComponent {
 
   form: FormGroup = new FormGroup({});
   id: FormControl = new FormControl('', [Validators.required]);
-  naziv: FormControl = new FormControl('', [Validators.required]);
+  name: FormControl = new FormControl('', [Validators.required]);
   type: FormControl = new FormControl(BicycleType.Mountain, [
     Validators.required,
   ]);
@@ -37,7 +37,7 @@ export class StationAdminDialogComponent {
   ) {
     this.form = new FormGroup({
       id: this.id,
-      naziv: this.naziv,
+      name: this.name,
       type: this.type,
     });
 
@@ -54,6 +54,7 @@ export class StationAdminDialogComponent {
       next: (data) => {
         this.bicycles.push(data);
         this.form.reset();
+        this.type.setValue(BicycleType.Mountain);
         this.addBicycleMode = false;
         this.error = '';
         this.loading = false;
@@ -72,11 +73,11 @@ export class StationAdminDialogComponent {
     return '';
   }
 
-  get nazivError() {
-    if (this.naziv.hasError('required')) {
+  get nameError() {
+    if (this.name.hasError('required')) {
       return 'You must enter a value';
     }
-    if (this.naziv.hasError('minlength')) {
+    if (this.name.hasError('minlength')) {
       return 'Lock code must be at least 4 characters long';
     }
     return '';

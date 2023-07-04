@@ -10,10 +10,10 @@
           [error]="idError"
         ></app-input>
         <app-input
-          title="Naziv"
-          placeholder="Naziv"
-          [control]="naziv"
-          [error]="nazivError"
+          title="Name"
+          placeholder="Name"
+          [control]="name"
+          [error]="nameError"
         ></app-input>
         <mat-form-field>
           <mat-label>Bicycle type</mat-label>
@@ -45,19 +45,19 @@
             <mat-card-subtitle>id: {{ bicycle.id }}</mat-card-subtitle>
             <mat-card-subtitle>type: {{ bicycle.type }}</mat-card-subtitle>
             <mat-divider></mat-divider>
-            <mat-card-title>{{ bicycle.naziv }}</mat-card-title>
+            <mat-card-title>{{ bicycle.name }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <p>code: {{ bicycle.lockCode }}</p>
           </mat-card-content>
         </mat-card>
       </div>
-      <div *ngIf="bicycles.length === 0 && !loading">
+      <div *ngIf="bicycles.length === 0">
         <p>No bicycles</p>
       </div>
     </div>
   </ng-container>
-  <div *ngIf="!station" class="spinner">
+  <div *ngIf="!station" class="station-dialog-spinner">
     <mat-spinner></mat-spinner>
   </div>
   <div mat-dialog-actions>

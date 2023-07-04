@@ -18,10 +18,19 @@ import { MatInputModule } from '@angular/material/input';
 import { StationAdminDialogComponent } from './admin/station-admin-dialog/station-admin-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { StationClientDialogComponent } from './client/station-client-dialog/station-client-dialog.component';
+import { MyRentsComponent } from './client/my-rents/my-rents.component';
 import { AdminTabComponent } from './admin/admin-tab/admin-tab.component';
 
 @NgModule({
-  declarations: [AddStationComponent, StationAdminDialogComponent, AdminTabComponent],
+  declarations: [
+    AddStationComponent,
+    StationAdminDialogComponent,
+    StationClientDialogComponent,
+    MyRentsComponent,
+    ,
+    AdminTabComponent,
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,

@@ -11,6 +11,8 @@ import { UserRole } from '../shared/types/user-role.type';
 })
 export class NavComponent {
   hidden = true;
+  role$ = this.store.select((state) => state.auth.user.role);
+  role: UserRole = null;
   loggedIn$ = this.store.select((state) => state.auth.loggedIn);
   loggedIn = false;
   role$ = this.store.select((state) => state.auth.user.role);
