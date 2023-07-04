@@ -17,11 +17,3 @@ form {
 .bicycle {
   width: 150px !important;
 }
-
-.spinner {
-  margin-top: 50px;
-  margin-bottom: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}

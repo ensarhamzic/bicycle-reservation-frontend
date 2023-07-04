@@ -1,0 +1,13 @@
+<div class="dialog">
+  <ng-container *ngIf="station">
+    <h1 mat-dialog-title>{{ station | json }}</h1>
+    <div mat-dialog-content class="dialog-content"></div>
+  </ng-container>
+  <div *ngIf="!station" class="station-dialog-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+    <!-- <button mat-button cdkFocusInitial>Add</button> -->
+  </div>
+</div>

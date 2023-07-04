@@ -14,7 +14,7 @@ export class MapComponent {
   @Input() tempMarker: { lat: number; lng: number } | null = null;
 
   mapWidth = '100%';
-  mapHeight = '88vh';
+  mapHeight = '90vh';
   mapOptions: google.maps.MapOptions = {
     center: { lat: 43.141096, lng: 20.518112 },
     zoom: 14,

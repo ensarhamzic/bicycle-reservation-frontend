@@ -54,6 +54,7 @@ export class StationAdminDialogComponent {
       next: (data) => {
         this.bicycles.push(data);
         this.form.reset();
+        this.type.setValue(BicycleType.Mountain);
         this.addBicycleMode = false;
         this.error = '';
         this.loading = false;

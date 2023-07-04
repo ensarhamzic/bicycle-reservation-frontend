@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { UserRole } from '../shared/types/user-role.type';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddStationComponent } from '../user/admin/add-station/add-station.component';
 import { IStation } from '../shared/models/station.model';
 import { StationService } from '../services/station.service';
 import { StationAdminDialogComponent } from '../user/admin/station-admin-dialog/station-admin-dialog.component';
+import { StationClientDialogComponent } from '../user/client/station-client-dialog/station-client-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,11 @@ import { StationAdminDialogComponent } from '../user/admin/station-admin-dialog/
 export class HomeComponent {
   role$ = this.store.select((state) => state.auth.user.role);
   role: UserRole = null;
+
+  dialogOptions: MatDialogConfig = {
+    enterAnimationDuration: 200,
+    exitAnimationDuration: 200,
+  };
 
   stations: IStation[] = [];
   addStation: { lat: number; lng: number } | null = null;
@@ -41,8 +47,7 @@ export class HomeComponent {
         lng: event.latLng.toJSON().lng,
       };
       const addStationDialogRef = this.dialog.open(AddStationComponent, {
-        enterAnimationDuration: 200,
-        exitAnimationDuration: 200,
+        ...this.dialogOptions,
         data: this.addStation,
       });
 
@@ -56,8 +61,12 @@ export class HomeComponent {
   markerClickHandler(stanicaId: number) {
     if (this.role === 'Admin') {
       this.dialog.open(StationAdminDialogComponent, {
-        enterAnimationDuration: 200,
-        exitAnimationDuration: 200,
+        ...this.dialogOptions,
+        data: stanicaId,
+      });
+    } else if (this.role === 'Client') {
+      this.dialog.open(StationClientDialogComponent, {
+        ...this.dialogOptions,
         data: stanicaId,
       });
     }
