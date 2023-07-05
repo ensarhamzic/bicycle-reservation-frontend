@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
         ...this.dialogOptions,
         data: stanicaId,
       });
-    } else if (this.role === 'Management') {
+    } else if (this.role === 'Manager') {
       this.dialog.open(StationManagerDialogComponent, {
         ...this.dialogOptions,
         data: stanicaId,

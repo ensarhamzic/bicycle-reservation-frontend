@@ -162,8 +162,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
             <mat-option value="Servicer" *ngIf="role !== 'Servicer'"
               >Servicer</mat-option
             >
-            <mat-option value="Menagement" *ngIf="role !== 'Menagement'"
-              >Menagement</mat-option
+            <mat-option value="Manager" *ngIf="role !== 'Manager'"
+              >Manager</mat-option
             >
           </mat-select>
         </form>
