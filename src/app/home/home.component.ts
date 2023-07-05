@@ -9,6 +9,7 @@ import { StationService } from '../services/station.service';
 import { StationAdminDialogComponent } from '../user/admin/station-admin-dialog/station-admin-dialog.component';
 import { StationClientDialogComponent } from '../user/client/station-client-dialog/station-client-dialog.component';
 import { StationManagerDialogComponent } from '../user/manager/station-manager-dialog/station-manager-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,8 @@ import { StationManagerDialogComponent } from '../user/manager/station-manager-d
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  loggedIn$ = this.store.select((state) => state.auth.loggedIn);
+  loggedIn: boolean = false;
   role$ = this.store.select((state) => state.auth.user.role);
   role: UserRole = null;
 
@@ -35,7 +38,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     public dialog: MatDialog,
-    private stationService: StationService
+    private stationService: StationService,
+    private router: Router
   ) {
     this.role$.subscribe((role) => {
       this.role = role;
@@ -43,6 +47,10 @@ export class HomeComponent implements OnInit {
 
     this.stationService.getStations().subscribe((data) => {
       this.stations = data;
+    });
+
+    this.loggedIn$.subscribe((loggedIn) => {
+      this.loggedIn = loggedIn;
     });
   }
 
@@ -69,6 +77,7 @@ export class HomeComponent implements OnInit {
   }
 
   markerClickHandler(stanicaId: number) {
+    if (!this.loggedIn) this.router.navigate(['/login']);
     if (this.role === 'Admin') {
       this.dialog.open(StationAdminDialogComponent, {
         ...this.dialogOptions,
