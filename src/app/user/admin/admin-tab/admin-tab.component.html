@@ -25,7 +25,7 @@
         <mat-divider></mat-divider>
         <mat-card-content>
           <p>Role: {{ user.role }}</p>
-          <p>Credits: {{ user.credits }}</p>
+          <p *ngIf="user.role === 'Client'">Credits: {{ user.credits }}</p>
           <p>Email: {{ user.email }}</p>
         </mat-card-content>
         <mat-card-actions align="end">
@@ -33,7 +33,7 @@
             mat-button
             class="promote"
             style="color: white; background-color: blue"
-            (click)="openDialog('0ms', '0ms', 0, user.id ,user.role || null)"
+            (click)="openDialog('0ms', '0ms', 0, user.id, user.role || null)"
           >
             PROMOTE
           </button>

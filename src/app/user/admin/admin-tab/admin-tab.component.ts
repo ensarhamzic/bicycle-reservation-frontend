@@ -78,12 +78,14 @@ export class AdminTabComponent {
           this.users = this.users.map((user) => {
             if (user.id == res.id) {
               user.role = res.role;
+              if (res.role === 'Client') user.credits = 100;
             }
             return user;
           });
           this.filteredUsers = this.filteredUsers.map((user) => {
             if (user.id == res.id) {
               user.role = res.role;
+              if (res.role === 'Client') user.credits = 100;
             }
             return user;
           });
