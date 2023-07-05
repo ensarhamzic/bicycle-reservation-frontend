@@ -1,1 +1,62 @@
-<p>station-manager-dialog works!</p>
+<div class="dialog">
+  <ng-container *ngIf="station && !bicycleDetails && !bicycleDetailsLoading">
+    <h1 mat-dialog-title>{{ station.name }}</h1>
+    <div mat-dialog-content class="dialog-content">
+      <div *ngIf="stationDetails">
+        <div class="station-details">
+          <p>Total arrivals: {{ stationDetails.arrivals }}</p>
+          |
+          <p>Total departures: {{ stationDetails.departures }}</p>
+          |
+          <p>Total bicycles: {{ stationDetails.bicycles }}</p>
+          |
+          <p>Total repairs: {{ stationDetails.breakdowns }}</p>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="bicycle-list" *ngIf="bicycles.length > 0">
+        <mat-card class="bicycle" *ngFor="let bicycle of bicycles">
+          <mat-card-header class="bicyle-card-content">
+            <mat-card-subtitle>type: {{ bicycle.type }}</mat-card-subtitle>
+            <mat-divider></mat-divider>
+            <mat-card-title>{{ bicycle.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="openBicycleDetails(bicycle.id)"
+              class="addButton"
+            >
+              Details
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div *ngIf="bicycles.length === 0">
+        <p>No bicycles</p>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="bicycleDetails">
+    <h1 mat-dialog-title>Bicycle details</h1>
+    <div mat-dialog-content class="dialog-content">
+      <div>
+        <p>Hours Rented: {{ bicycleDetails.hoursRented }}</p>
+        <p>Credits Spent: {{ bicycleDetails.creditsSpent }}</p>
+        <p>Times Serviced: {{ bicycleDetails.timesServiced }}</p>
+        <p>Times Repaired: {{ bicycleDetails.timesRepaired }}</p>
+      </div>
+      <button mat-raised-button (click)="bicycleDetails = null">Back</button>
+    </div>
+  </ng-container>
+
+  <div *ngIf="!station || bicycleDetailsLoading" class="station-dialog-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+</div>

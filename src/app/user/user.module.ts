@@ -26,6 +26,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { BreakdownTabComponent } from './servicer/breakdown-tab/breakdown-tab.component';
 import { ServiceTabComponent } from './servicer/service-tab/service-tab.component';
 import { StationManagerDialogComponent } from './manager/station-manager-dialog/station-manager-dialog.component';
+import { StatisticsComponent } from './manager/statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { StationManagerDialogComponent } from './manager/station-manager-dialog/
     BreakdownTabComponent,
     ServiceTabComponent,
     StationManagerDialogComponent,
+    StatisticsComponent,
   ],
   imports: [
     CommonModule,

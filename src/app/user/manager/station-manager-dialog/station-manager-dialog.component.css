@@ -1,0 +1,19 @@
+.bicycle-list {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+  gap: 10px;
+}
+
+.bicycle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 150px !important;
+}
+
+.station-details {
+  display: flex;
+  gap: 10px;
+}

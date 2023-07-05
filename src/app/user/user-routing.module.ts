@@ -9,6 +9,8 @@ import { AdminTabComponent } from './admin/admin-tab/admin-tab.component';
 import { isAdmin } from '../guards/isAdmin.guard';
 import { ServicerTabComponent } from './servicer/servicer-tab/servicer-tab.component';
 import { isServicer } from '../guards/isServicer.guard';
+import { StatisticsComponent } from './manager/statistics/statistics.component';
+import { isManager } from '../guards/is-manager.guard';
 
 const routes: Routes = [
   {
@@ -24,7 +26,7 @@ const routes: Routes = [
   {
     path: 'servicer',
     component: ServicerTabComponent,
-    canActivate: [isServicer]
+    canActivate: [isServicer],
   },
   {
     path: 'my-rents',
@@ -35,6 +37,11 @@ const routes: Routes = [
     path: 'adminTab',
     component: AdminTabComponent,
     canActivate: [isAdmin],
+  },
+  {
+    path: 'statistics',
+    component: StatisticsComponent,
+    canActivate: [isManager],
   },
 ];
 
