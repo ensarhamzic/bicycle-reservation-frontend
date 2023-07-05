@@ -1,7 +1,5 @@
 <div [class]="isLoading ? 'error' : ''">
   <mat-card>
-    <!-- <h1>Admin Tab</h1> -->
-
     <div class="inputContainer">
       <app-input
         title="Search by username"
@@ -15,7 +13,13 @@
       <mat-card *ngFor="let user of filteredUsers" class="contentCard">
         <mat-card-header>
           <mat-card-title style="font-size: x-large">
-            <img src="assets/default-profle.jpeg" alt="" class="profileImage" />
+            <img
+              [src]="
+                user.imageUrl ? user.imageUrl : 'assets/default-profle.jpeg'
+              "
+              alt=""
+              class="profileImage"
+            />
             {{ user.username }}
           </mat-card-title>
           <mat-card-subtitle style="font-size: large"

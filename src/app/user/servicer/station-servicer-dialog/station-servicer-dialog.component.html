@@ -1,0 +1,59 @@
+<div class="dialog">
+  <ng-container *ngIf="station && !selectedBicycleId">
+    <h1 mat-dialog-title>{{ station.name }}</h1>
+      <mat-form-field *ngIf="movingBike">
+        <mat-label>Choose an option</mat-label>
+        <mat-select [formControl]="toppings">
+          <mat-option
+            *ngFor="let station of allStations"
+            [value]="station.id"
+            >{{ station.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    <div mat-dialog-content class="dialog-content">
+      <div class="bicycle-list" *ngIf="bicycles.length > 0">
+        <mat-card class="bicycle" *ngFor="let bicycle of bicycles">
+          <mat-card-header class="bicyle-card-content">
+            <mat-card-subtitle
+              >type: {{ bicycle.type }}
+              <input
+                type="checkbox"
+                (change)="onCheckboxChange($event)"
+                [value]="bicycle.id"
+                *ngIf="movingBike"
+            /></mat-card-subtitle>
+            <mat-divider></mat-divider>
+            <mat-card-title>{{ bicycle.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div *ngIf="bicycles.length === 0">
+        <p>No bicycles</p>
+      </div>
+    </div>
+  </ng-container>
+
+  <div *ngIf="!station" class="station-dialog-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div mat-dialog-actions class="closeBar">
+    <button mat-button mat-dialog-close>Close</button>
+    <div class="" *ngIf="bicycles.length !== 0 && !movingBike">
+      <button class="seeMore" (click)="movingProcess()">Move bicycle</button>
+    </div>
+    <div class="selectContainer" *ngIf="movingBike">
+      <button class="seeMoreError" (click)="movingProcess()">Cancel</button>
+      <button
+        [class]="movingBicyclesIds.length === 0 || toppings.value?.length === 0 ?'seeMoreOpacity' : 'seeMore'"
+        [disabled]="movingBicyclesIds.length === 0 || toppings.value?.length === 0"
+        (click)="proba()"
+      >
+        Move Them
+      </button>
+    </div>
+  </div>
+</div>
