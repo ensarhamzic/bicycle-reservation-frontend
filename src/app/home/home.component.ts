@@ -8,6 +8,7 @@ import { IStation } from '../shared/models/station.model';
 import { StationService } from '../services/station.service';
 import { StationAdminDialogComponent } from '../user/admin/station-admin-dialog/station-admin-dialog.component';
 import { StationClientDialogComponent } from '../user/client/station-client-dialog/station-client-dialog.component';
+import { StationManagerDialogComponent } from '../user/manager/station-manager-dialog/station-manager-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -75,6 +76,11 @@ export class HomeComponent implements OnInit {
       });
     } else if (this.role === 'Client') {
       this.dialog.open(StationClientDialogComponent, {
+        ...this.dialogOptions,
+        data: stanicaId,
+      });
+    } else if (this.role === 'Management') {
+      this.dialog.open(StationManagerDialogComponent, {
         ...this.dialogOptions,
         data: stanicaId,
       });
