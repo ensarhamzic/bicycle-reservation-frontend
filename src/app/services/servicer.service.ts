@@ -69,4 +69,19 @@ export class ServicerService {
       }
     );
   };
+
+  moveBicycles = (bicyclesIds: string[], stationId: number): Observable<any> => {
+    return this.http.post<any>(
+      `${environment.apiUrl}/Servicer/Move`,
+      {
+        "BicycleIds": bicyclesIds,
+        stationId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      }
+    );
+  }
 }

@@ -10,6 +10,7 @@ import { StationAdminDialogComponent } from '../user/admin/station-admin-dialog/
 import { StationClientDialogComponent } from '../user/client/station-client-dialog/station-client-dialog.component';
 import { StationManagerDialogComponent } from '../user/manager/station-manager-dialog/station-manager-dialog.component';
 import { Router } from '@angular/router';
+import { StationServicerDialogComponent } from '../user/servicer/station-servicer-dialog/station-servicer-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -93,6 +94,12 @@ export class HomeComponent implements OnInit {
         ...this.dialogOptions,
         data: stanicaId,
       });
+    }
+    else if(this.role === 'Servicer'){
+      this.dialog.open(StationServicerDialogComponent,{
+        ...this.dialogOptions,
+        data: stanicaId
+      })
     }
   }
 

@@ -1,0 +1,81 @@
+.bicycle-list {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+  gap: 10px;
+}
+
+.bicycle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 150px !important;
+}
+
+.closeBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.seeMore,
+.seeMoreError,
+.seeMoreOpacity {
+  padding: 0.7rem 1.7rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  min-width: 150px;
+  max-width: 270px;
+  background-color: #0e4f8b;
+  color: #fff;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.seeMoreError {
+  background-color: #f01313;
+}
+
+.hideButton {
+  visibility: hidden;
+}
+
+.addButton {
+  visibility: visible;
+}
+
+mat-card-subtitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+input {
+  width: 20px;
+}
+
+.seeMoreOpacity {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* .header{
+    display: flex;
+    justify-content: space-around;
+} */
+
+.example-additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}
+
+.selectDiv{
+    display: flex;
+    justify-content: flex-end;
+}
+
+mat-form-field{
+    margin-left: 10px;
+    display: inline-block;
+}
