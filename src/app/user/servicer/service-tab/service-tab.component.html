@@ -1,0 +1,27 @@
+<main>
+  <mat-card>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-card *ngFor="let service of services">
+        <mat-card-header>
+          <mat-card-title>{{service.bicycle.name}}</mat-card-title>
+          <mat-card-subtitle>
+            Id: {{ service.bicycle.id }} <br />
+            Type: {{ service.bicycle.type }} <br />
+            Last Serviced Date: {{ service.serviceDate ? (service.serviceDate | date:'short') : 'Not serviced yet'}} <br>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions align="end">
+          <button
+            mat-button
+            class="seeMore"
+            style="color: #fff"
+            (click)="addService(service.bicycle.id)"
+          >
+            Service
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</main>

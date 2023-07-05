@@ -1,0 +1,22 @@
+<main>
+  <mat-card *ngFor="let breakdown of breakdowns">
+    <h1 class="stationHeader">{{ breakdown.station.name }}</h1>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-card *ngFor="let bicycle of breakdown.bicycles">
+        <mat-card-header>
+          <mat-card-title>{{ bicycle.name }}</mat-card-title>
+          <mat-card-subtitle
+            >Id: {{ bicycle.id }} <br />
+            Type: {{ bicycle.type }} <br />
+            Breakdown Descritpion: {{ bicycle.breakdowns[0].description }} <br>
+            Breakdown Date: {{ (bicycle.breakdowns[0].date | date:'short') }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions align="end">
+          <button mat-button class="seeMore" style="color: #fff;" (click)="resolving(bicycle.breakdowns[0].id)">Fix</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</main>

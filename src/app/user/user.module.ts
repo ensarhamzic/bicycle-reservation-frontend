@@ -21,6 +21,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StationClientDialogComponent } from './client/station-client-dialog/station-client-dialog.component';
 import { MyRentsComponent } from './client/my-rents/my-rents.component';
 import { AdminTabComponent } from './admin/admin-tab/admin-tab.component';
+import { ServicerTabComponent } from './servicer/servicer-tab/servicer-tab.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { BreakdownTabComponent } from './servicer/breakdown-tab/breakdown-tab.component';
+import { ServiceTabComponent } from './servicer/service-tab/service-tab.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,9 @@ import { AdminTabComponent } from './admin/admin-tab/admin-tab.component';
     StationClientDialogComponent,
     MyRentsComponent,
     AdminTabComponent,
+    ServicerTabComponent,
+    BreakdownTabComponent,
+    ServiceTabComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +52,7 @@ import { AdminTabComponent } from './admin/admin-tab/admin-tab.component';
     ReactiveFormsModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
   ],
   exports: [AddStationComponent],
 })

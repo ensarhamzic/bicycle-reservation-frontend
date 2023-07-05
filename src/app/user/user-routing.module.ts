@@ -7,6 +7,8 @@ import { isClientGuard } from '../guards/is-client.guard';
 import { MyRentsComponent } from './client/my-rents/my-rents.component';
 import { AdminTabComponent } from './admin/admin-tab/admin-tab.component';
 import { isAdmin } from '../guards/isAdmin.guard';
+import { ServicerTabComponent } from './servicer/servicer-tab/servicer-tab.component';
+import { isServicer } from '../guards/isServicer.guard';
 
 const routes: Routes = [
   {
@@ -18,6 +20,11 @@ const routes: Routes = [
     path: 'deposit',
     component: DepositComponent,
     canActivate: [loggedInGuard],
+  },
+  {
+    path: 'servicer',
+    component: ServicerTabComponent,
+    canActivate: [isServicer]
   },
   {
     path: 'my-rents',

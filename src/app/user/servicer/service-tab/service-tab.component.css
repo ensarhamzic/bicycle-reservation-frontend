@@ -1,0 +1,11 @@
+.seeMore {
+  padding: 0.7rem 1.7rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  min-width: 150px;
+  max-width: 270px;
+  background-color: #0e4f8b;
+  cursor: pointer;
+}
