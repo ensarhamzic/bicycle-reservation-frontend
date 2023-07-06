@@ -4,4 +4,6 @@
   [tempMarker]="addStation"
   [stations]="stations"
   [userCords]="userCords"
+  [moveTo]="moveTo"
+  (mapMoveEnd)="mapMoveEnd($event)"
 ></app-map>

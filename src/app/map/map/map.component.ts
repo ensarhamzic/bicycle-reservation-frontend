@@ -1,19 +1,34 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { IStation } from 'src/app/shared/models/station.model';
+import { Easing, Tween, update } from '@tweenjs/tween.js';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
-export class MapComponent {
+export class MapComponent implements OnChanges {
   @Output() mapClick: EventEmitter<google.maps.MapMouseEvent> =
     new EventEmitter();
   @Output() markerClick: EventEmitter<number> = new EventEmitter();
+  @Output() mapMoveEnd: EventEmitter<number | null> = new EventEmitter();
   @Input() stations: IStation[] = [];
   @Input() tempMarker: { lat: number; lng: number } | null = null;
   @Input() userCords: { lat: number; lng: number } = { lat: 0, lng: 0 };
+  @Input() moveTo: {
+    lat: number;
+    lng: number;
+    stationId: number | null;
+  } | null = null;
 
+  map: google.maps.Map | null = null;
   mapWidth = '100%';
   mapHeight = '90vh';
   mapOptions: google.maps.MapOptions = {
@@ -25,10 +40,10 @@ export class MapComponent {
     disableDefaultUI: true,
     restriction: {
       latLngBounds: {
-        north: 43.2,
-        south: 43.1,
-        west: 20.4,
-        east: 20.6,
+        north: 43.24,
+        south: 43.05,
+        west: 20.29,
+        east: 20.69,
       },
       strictBounds: true,
     },
@@ -62,6 +77,91 @@ export class MapComponent {
   };
 
   constructor() {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.map != null && this.moveTo === null) {
+      this.map.setZoom(14);
+      const map = this.map!;
+
+      setTimeout(() => {
+        map.panTo({ lat: 43.141096, lng: 20.518112 });
+      }, 1000);
+    }
+
+    if (this.map && this.moveTo) {
+      this.map.panTo(this.moveTo!);
+      const map = this.map!;
+      setTimeout(() => {
+        map.setZoom(18);
+        setTimeout(() => {
+          this.mapMoveEnd.emit(this.moveTo!.stationId);
+        }, 200);
+      }, 500);
+    }
+  }
+
+  onMapReady(map: google.maps.Map) {
+    this.map = map;
+
+    new google.maps.Rectangle({
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.35,
+      strokeWeight: 0,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map,
+      bounds: {
+        north: 43.24,
+        south: 43.2,
+        west: 20.29,
+        east: 20.69,
+      },
+    });
+
+    new google.maps.Rectangle({
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.35,
+      strokeWeight: 0,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map,
+      bounds: {
+        north: 43.2,
+        south: 43.05,
+        west: 20.6,
+        east: 20.69,
+      },
+    });
+
+    new google.maps.Rectangle({
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.35,
+      strokeWeight: 0,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map,
+      bounds: {
+        north: 43.1,
+        south: 43.05,
+        west: 20.29,
+        east: 20.6,
+      },
+    });
+    new google.maps.Rectangle({
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.35,
+      strokeWeight: 0,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map,
+      bounds: {
+        north: 43.2,
+        south: 43.1,
+        west: 20.29,
+        east: 20.4,
+      },
+    });
+  }
 
   onMapClick(event: google.maps.MapMouseEvent) {
     event.stop(); // prevents default click behaviour

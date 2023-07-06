@@ -1,8 +1,10 @@
 <google-map
+  (mapInitialized)="onMapReady($event)"
   [height]="mapHeight"
   [width]="mapWidth"
   [options]="mapOptions"
   (mapClick)="onMapClick($event)"
+  id="map"
 >
   <map-marker
     *ngIf="userCords"
@@ -23,3 +25,5 @@
     [options]="tempMarkerOptions"
   ></map-marker>
 </google-map>
+
+<!-- <div id="map1"></div> -->

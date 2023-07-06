@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
   role$ = this.store.select((state) => state.auth.user.role);
   role: UserRole = null;
 
+  moveTo: { lat: number; lng: number; stationId: number | null } | null = null;
+
   userCords: { lat: number; lng: number } = {
     lat: 0,
     lng: 0,
@@ -65,6 +67,7 @@ export class HomeComponent implements OnInit {
         lat: event.latLng.toJSON().lat,
         lng: event.latLng.toJSON().lng,
       };
+      this.moveTo = { ...this.addStation, stationId: null };
       const addStationDialogRef = this.dialog.open(AddStationComponent, {
         ...this.dialogOptions,
         data: this.addStation,
@@ -73,34 +76,51 @@ export class HomeComponent implements OnInit {
       addStationDialogRef.afterClosed().subscribe((data) => {
         this.addStation = null;
         if (data) this.stations.push(data);
+        this.moveTo = null;
       });
     }
   }
 
-  markerClickHandler(stanicaId: number) {
+  markerClickHandler(stationId: number) {
+    const station = this.stations.find((s) => s.id === stationId)!;
+    this.moveTo = {
+      lat: station.lat,
+      lng: station.lng,
+      stationId: stationId,
+    };
+  }
+
+  mapMoveEnd(event: number | null) {
+    if (event) this.openStation(event);
+  }
+
+  openStation(stationId: number) {
     if (!this.loggedIn) this.router.navigate(['/login']);
     if (this.role === 'Admin') {
       this.dialog.open(StationAdminDialogComponent, {
         ...this.dialogOptions,
-        data: stanicaId,
+        data: stationId,
       });
     } else if (this.role === 'Client') {
       this.dialog.open(StationClientDialogComponent, {
         ...this.dialogOptions,
-        data: stanicaId,
+        data: stationId,
       });
     } else if (this.role === 'Manager') {
       this.dialog.open(StationManagerDialogComponent, {
         ...this.dialogOptions,
-        data: stanicaId,
+        data: stationId,
+      });
+    } else if (this.role === 'Servicer') {
+      this.dialog.open(StationServicerDialogComponent, {
+        ...this.dialogOptions,
+        data: stationId,
       });
     }
-    else if(this.role === 'Servicer'){
-      this.dialog.open(StationServicerDialogComponent,{
-        ...this.dialogOptions,
-        data: stanicaId
-      })
-    }
+
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.moveTo = null;
+    });
   }
 
   getLocation() {
