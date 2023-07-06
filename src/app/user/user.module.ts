@@ -22,7 +22,7 @@ import { StationClientDialogComponent } from './client/station-client-dialog/sta
 import { MyRentsComponent } from './client/my-rents/my-rents.component';
 import { AdminTabComponent } from './admin/admin-tab/admin-tab.component';
 import { ServicerTabComponent } from './servicer/servicer-tab/servicer-tab.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { BreakdownTabComponent } from './servicer/breakdown-tab/breakdown-tab.component';
 import { ServiceTabComponent } from './servicer/service-tab/service-tab.component';
 import { StationManagerDialogComponent } from './manager/station-manager-dialog/station-manager-dialog.component';

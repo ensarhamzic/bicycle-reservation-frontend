@@ -55,4 +55,19 @@ export class ClientService {
       },
     });
   }
+
+  reportBreakdown(data: {
+    bicycleId: string;
+    description: string;
+  }): Observable<any> {
+    return this.http.post<any>(
+      `${environment.apiUrl}/client/report-breakdown`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      }
+    );
+  }
 }

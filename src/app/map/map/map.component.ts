@@ -103,12 +103,16 @@ export class MapComponent implements OnChanges {
   onMapReady(map: google.maps.Map) {
     this.map = map;
 
-    new google.maps.Rectangle({
+    const rectangleOptions = {
       strokeColor: '#FF0000',
-      strokeOpacity: 0.35,
+      strokeOpacity: 0.2,
       strokeWeight: 0,
       fillColor: '#FF0000',
-      fillOpacity: 0.35,
+      fillOpacity: 0.2,
+    };
+
+    new google.maps.Rectangle({
+      ...rectangleOptions,
       map,
       bounds: {
         north: 43.24,
@@ -119,11 +123,7 @@ export class MapComponent implements OnChanges {
     });
 
     new google.maps.Rectangle({
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.35,
-      strokeWeight: 0,
-      fillColor: '#FF0000',
-      fillOpacity: 0.35,
+      ...rectangleOptions,
       map,
       bounds: {
         north: 43.2,
@@ -134,11 +134,7 @@ export class MapComponent implements OnChanges {
     });
 
     new google.maps.Rectangle({
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.35,
-      strokeWeight: 0,
-      fillColor: '#FF0000',
-      fillOpacity: 0.35,
+      ...rectangleOptions,
       map,
       bounds: {
         north: 43.1,
@@ -148,11 +144,7 @@ export class MapComponent implements OnChanges {
       },
     });
     new google.maps.Rectangle({
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.35,
-      strokeWeight: 0,
-      fillColor: '#FF0000',
-      fillOpacity: 0.35,
+      ...rectangleOptions,
       map,
       bounds: {
         north: 43.2,

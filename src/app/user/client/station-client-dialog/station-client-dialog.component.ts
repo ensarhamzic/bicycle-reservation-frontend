@@ -22,7 +22,17 @@ export class StationClientDialogComponent {
   hasRentedBike: boolean = false;
 
   selectedBicycleId: string | null = null;
-  rentingBike: boolean = false;
+  actionInProgress: boolean = false;
+
+  rentMode: boolean = false;
+  reportMode: boolean = false;
+
+  reportingBreakdown: boolean = false;
+
+  reportBikeForm: FormGroup = new FormGroup({});
+  breakdownDescription: FormControl = new FormControl('', [
+    Validators.required,
+  ]);
 
   rentBikeForm: FormGroup = new FormGroup({});
   numberOfHours: FormControl = new FormControl(1, [
@@ -59,6 +69,22 @@ export class StationClientDialogComponent {
 
   enterRentMode(bicycleId: string) {
     this.selectedBicycleId = bicycleId;
+    this.rentMode = true;
+  }
+
+  rentModeClose() {
+    this.rentMode = false;
+    this.selectedBicycleId = null;
+  }
+
+  enterReportMode(bicycleId: string) {
+    this.selectedBicycleId = bicycleId;
+    this.reportMode = true;
+  }
+
+  reportModeClose() {
+    this.reportMode = false;
+    this.selectedBicycleId = null;
   }
 
   rentBicyle() {
@@ -70,7 +96,7 @@ export class StationClientDialogComponent {
       this.toastr.error('You do not have enough credits to rent this bicycle');
       return;
     }
-    this.rentingBike = true;
+    this.actionInProgress = true;
     const data = {
       bicycleId: this.selectedBicycleId,
       numberOfHours: this.numberOfHours.value,
@@ -83,12 +109,35 @@ export class StationClientDialogComponent {
         this.toastr.success(
           `You have successfully rented a bicycle. Lock code: ${data.lockCode}. Credits left: ${data.balance}`
         );
-        this.rentingBike = false;
+        this.actionInProgress = false;
         this.dialogRef.close();
       },
       error: (err) => {
         this.toastr.error(err.error.error);
-        this.rentingBike = false;
+        this.actionInProgress = false;
+        this.dialogRef.close();
+      },
+    });
+  }
+
+  reportBreakdown() {
+    if (!this.selectedBicycleId) return;
+    const data = {
+      bicycleId: this.selectedBicycleId,
+      description: this.breakdownDescription.value,
+    };
+    this.actionInProgress = true;
+    this.clientService.reportBreakdown(data).subscribe({
+      next: () => {
+        this.toastr.success(
+          `You have successfully reported breakdown on this bicycle`
+        );
+        this.actionInProgress = false;
+        this.dialogRef.close();
+      },
+      error: (err) => {
+        this.toastr.error(err.error.error);
+        this.actionInProgress = false;
         this.dialogRef.close();
       },
     });
@@ -109,6 +158,14 @@ export class StationClientDialogComponent {
 
     if (this.numberOfHours.hasError('min')) {
       return 'You must enter a value greater than 0';
+    }
+
+    return '';
+  }
+
+  get breakdownDescriptionError() {
+    if (this.breakdownDescription.hasError('required')) {
+      return 'You must enter a value';
     }
 
     return '';

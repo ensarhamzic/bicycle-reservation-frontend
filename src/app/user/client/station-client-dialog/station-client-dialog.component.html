@@ -1,20 +1,25 @@
 <div class="dialog">
-  <ng-container *ngIf="station && !selectedBicycleId">
+  <ng-container *ngIf="station && !rentMode && !reportMode">
     <h1 mat-dialog-title>{{ station.name }}</h1>
     <div mat-dialog-content class="dialog-content">
       <div class="bicycle-list" *ngIf="bicycles.length > 0">
         <mat-card class="bicycle" *ngFor="let bicycle of bicycles">
+          <img
+            src="assets/warning-icon.png"
+            alt="rent"
+            class="report-breakdown"
+            (click)="enterReportMode(bicycle.id)"
+          />
           <mat-card-header class="bicyle-card-content">
             <mat-card-subtitle>type: {{ bicycle.type }}</mat-card-subtitle>
             <mat-divider></mat-divider>
             <mat-card-title>{{ bicycle.name }}</mat-card-title>
           </mat-card-header>
-          <mat-card-content>
+          <mat-card-content class="actions">
             <button
               mat-raised-button
               color="primary"
               (click)="enterRentMode(bicycle.id)"
-              class="addButton"
               [disabled]="hasRentedBike"
             >
               Rent
@@ -28,7 +33,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="selectedBicycleId">
+  <ng-container *ngIf="rentMode">
     <h1 mat-dialog-title>Rent bike</h1>
     <div mat-dialog-content class="dialog-content">
       <form [formGroup]="rentBikeForm">
@@ -39,15 +44,60 @@
           title="Number Of Hours"
           [error]="numberOfHoursError"
         ></app-input>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="rentBicyle()"
-          [disabled]="!rentBikeForm.valid || rentingBike"
-          class="rentButton"
-        >
-          Rent Bicycle
-        </button>
+        <div class="actions">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="rentBicyle()"
+            [disabled]="!rentBikeForm.valid || actionInProgress"
+            class="rentButton"
+          >
+            Rent Bicycle
+          </button>
+          <button
+            mat-raised-button
+            (click)="rentModeClose()"
+            type="button"
+            [disabled]="!rentBikeForm.valid || actionInProgress"
+            class="rentButton"
+          >
+            Go back
+          </button>
+        </div>
+      </form>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="reportMode">
+    <h1 mat-dialog-title>Report breakdown</h1>
+    <div mat-dialog-content class="dialog-content">
+      <form [formGroup]="reportBikeForm">
+        <app-input
+          [control]="breakdownDescription"
+          placeholder="Description"
+          title="Description"
+          [error]="breakdownDescriptionError"
+        ></app-input>
+        <div class="actions">
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="reportBreakdown()"
+            [disabled]="!reportBikeForm.valid || actionInProgress"
+            class="rentButton"
+          >
+            Report
+          </button>
+          <button
+            mat-raised-button
+            (click)="reportModeClose()"
+            type="button"
+            [disabled]="!reportBikeForm.valid || actionInProgress"
+            class="rentButton"
+          >
+            Go back
+          </button>
+        </div>
       </form>
     </div>
   </ng-container>
