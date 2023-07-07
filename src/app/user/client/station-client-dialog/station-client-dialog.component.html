@@ -2,6 +2,15 @@
   <ng-container *ngIf="station && !rentMode && !reportMode">
     <h1 mat-dialog-title>{{ station.name }}</h1>
     <div mat-dialog-content class="dialog-content">
+      <mat-chip-listbox
+        aria-label="Fish selection"
+        (change)="filterChanged($event)"
+      >
+        <mat-chip-option>Mountain</mat-chip-option>
+        <mat-chip-option>Electric</mat-chip-option>
+        <mat-chip-option>Road</mat-chip-option>
+        <mat-chip-option>City</mat-chip-option>
+      </mat-chip-listbox>
       <div class="bicycle-list" *ngIf="bicycles.length > 0">
         <mat-card class="bicycle" *ngFor="let bicycle of bicycles">
           <img
@@ -27,6 +36,18 @@
           </mat-card-content>
         </mat-card>
       </div>
+      <mat-paginator
+        *ngIf="bicycles.length > 0"
+        class="demo-paginator"
+        [length]="bicyclesCount"
+        [pageSize]="pageSize"
+        showFirstLastButtons="true"
+        hidePageSize="true"
+        [pageIndex]="page"
+        aria-label="Select page"
+        (page)="pageChanged($event)"
+      >
+      </mat-paginator>
       <div *ngIf="bicycles.length === 0">
         <p>No bicycles</p>
       </div>
