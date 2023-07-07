@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://localhost:7050/api',
+  apiUrl: 'https://ensarhamzic-001-site1.dtempurl.com/api',
   rentHourPrice: 5,
 };
