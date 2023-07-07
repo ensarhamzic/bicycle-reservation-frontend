@@ -10,13 +10,14 @@
 </header>
 <nav [class.hide]="hidden" (click)="hidden = !hidden">
   <a id="close-nav" class="close-button">X</a>
+  <a routerLink="">Map</a>
   <a routerLink="login" *ngIf="!loggedIn">Login</a>
   <a routerLink="register" *ngIf="!loggedIn">Register</a>
   <a routerLink="statistics" *ngIf="role === 'Manager'">Statistics</a>
   <a routerLink="deposit" *ngIf="role === 'Client'">Deposit Credits</a>
   <a routerLink="servicer" *ngIf="role === 'Servicer'">Servicer Tab</a>
   <a routerLink="adminTab" *ngIf="role === 'Admin'">Admin Tab</a>
-  <a routerLink="userInfo" *ngIf="loggedIn">Profile</a>
+  <a routerLink="userInfo" *ngIf="loggedIn && !isGoogle">Profile</a>
   <a routerLink="my-rents" *ngIf="(role$ | async) === 'Client'">My Rents</a>
   <a (click)="logout()" *ngIf="loggedIn">Log Out</a>
 </nav>

@@ -142,5 +142,23 @@ export class AuthService {
         },
       }
     );
-  }
+  };
+
+  googleAuth = (user: any): Observable<IAuth> => {
+    return this.http.post<IAuth>(`${environment.apiUrl}/Auth/google-login`, {
+      "email": user.email,
+      "firstName": user.firstName,
+      "lastName": user.lastName,
+      "imageUrl": user.imageUrl,
+      "id": user.id,
+      "username": user.name,
+    });
+  };
 }
+
+// email: string;
+//     firstName: string;
+//     lastName: string;
+//     imageUrl: string;
+//     id: string;
+//     username: string;

@@ -1,9 +1,11 @@
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/services/auth.service';
 import { AppState } from 'src/app/state/app.state';
 import { register } from 'src/app/state/auth/auth.actions';
+import { googleAuth } from 'src/app/state/auth/auth.actions';
 
 @Component({
   selector: 'app-register',
@@ -22,13 +24,19 @@ export class RegisterComponent {
     Validators.required,
     Validators.minLength(8),
   ]);
+
+  googleData: any = {};
+
   confirmPassword: FormControl = new FormControl('', Validators.required);
   username: FormControl = new FormControl('', Validators.required);
 
   loading$ = this.store.select((state) => state.auth.loading);
   error$ = this.store.select((state) => state.auth.error);
 
-  constructor(private store: Store<AppState>) {
+  constructor(
+    private store: Store<AppState>,
+    private authService: SocialAuthService
+  ) {
     this.form = new FormGroup({
       firstName: this.firstName,
       lastName: this.lastName,
@@ -37,11 +45,22 @@ export class RegisterComponent {
       confirmPassword: this.confirmPassword,
       username: this.username,
     });
+    this.authService.authState.subscribe((user) => {
+      if (user !== null) {
+        this.googleData = user;
+        console.log(this.googleData);
+        this.store.dispatch(googleAuth(this.googleData));
+        this.googleData = null;
+      }
+    });
+  }
+
+  signOut(): void {
+    this.authService.signOut();
   }
 
   register() {
     if (this.form.invalid) return;
-    console.log('ensar');
     this.store.dispatch(register(this.form.value));
   }
 

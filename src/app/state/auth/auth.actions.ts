@@ -77,6 +77,11 @@ export const deposit = createAction(
   props<{ amount: number }>()
 );
 
+export const googleAuth = createAction(
+  '[Auth] GoogleAuth',
+  props<{ user: any }>()
+);
+
 export const deleteImage = createAction('[Auth] Delete Image');
 
 export const logout = createAction('[Auth] Logout');

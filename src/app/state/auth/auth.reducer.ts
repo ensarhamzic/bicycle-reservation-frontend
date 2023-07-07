@@ -19,6 +19,7 @@ import {
   deleteImage,
   deleteAcc,
   deposit,
+  googleAuth
 } from './auth.actions';
 import { state } from '@angular/animations';
 import { UserRole } from 'src/app/shared/types/user-role.type';
@@ -44,6 +45,7 @@ export const initialState: AuthState = {
     role: (localStorage.getItem('role') as UserRole) || null,
     verified: false,
     credits: 0,
+    isGoogle: false
   },
   token: localStorage.getItem('token') || '',
   loggedIn: !!localStorage.getItem('token'),
@@ -111,6 +113,7 @@ export const authReducer = createReducer(
         imageUrl: null,
         verified: false,
         credits: 0,
+        isGoogle: false
       },
       token: '',
       loggedIn: false,
@@ -211,5 +214,12 @@ export const authReducer = createReducer(
         credits: balance,
       },
     };
+  }),
+
+  on(googleAuth, (state) => {
+    return {
+      ...state,
+      loading: true
+    }
   })
 );

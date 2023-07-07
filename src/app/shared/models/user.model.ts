@@ -10,4 +10,5 @@ export interface IUser {
   role: UserRole;
   verified: boolean;
   credits: number;
+  isGoogle: boolean; 
 }

@@ -22,6 +22,7 @@ import {
   deleteImage,
   deleteAcc,
   deposit,
+  googleAuth,
 } from './auth.actions';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -259,6 +260,27 @@ export class AuthEffects {
           catchError(({ error }) =>
             of(forgotPasswordEmailFailure({ error: error.error }))
           )
+        )
+      )
+    );
+  });
+
+  googleAuth$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(googleAuth),
+      switchMap((data) =>
+        this.authService.googleAuth(data).pipe(
+          map((data) => authSuccess({ data })),
+          tap((data) => {
+            if (data.data.user.verified) {
+              console.log(data);
+              this.toastr.success('Login successful');
+              this.router.navigate(['/']);
+            } else {
+              this.router.navigate(['/verify']);
+            }
+          }),
+          catchError(({ error }) => of(authFailure({ error: error.error })))
         )
       )
     );

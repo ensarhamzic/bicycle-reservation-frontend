@@ -4,6 +4,7 @@ import { AppState } from '../state/app.state';
 import { logout } from '../state/auth/auth.actions';
 import { Router } from '@angular/router';
 import { UserRole } from '../shared/types/user-role.type';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -15,7 +16,9 @@ export class NavComponent {
   role: UserRole = null;
   loggedIn$ = this.store.select((state) => state.auth.loggedIn);
   loggedIn = false;
-  constructor(private store: Store<AppState>, private router: Router) {
+  isGoogle$ = this.store.select((state) => state.auth.user.isGoogle)
+  isGoogle: boolean = false;
+  constructor(private store: Store<AppState>, private router: Router, private authService: SocialAuthService) {
     this.loggedIn$.subscribe((loggedIn) => {
       this.loggedIn = loggedIn;
     });
@@ -23,6 +26,10 @@ export class NavComponent {
     this.role$.subscribe((role) => {
       this.role = role;
     });
+
+    this.isGoogle$.subscribe((isGoogle) => {
+      this.isGoogle = isGoogle
+    })
   }
 
   toggleNav() {
@@ -30,7 +37,10 @@ export class NavComponent {
   }
 
   logout() {
-    this.store.dispatch(logout());
-    this.router.navigate(['/login']);
+    if(this.isGoogle){
+        this.authService.signOut();
+    }
+      this.store.dispatch(logout());
+      this.router.navigate(['/login']);
   }
 }

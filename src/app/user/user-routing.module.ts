@@ -11,12 +11,13 @@ import { ServicerTabComponent } from './servicer/servicer-tab/servicer-tab.compo
 import { isServicer } from '../guards/isServicer.guard';
 import { StatisticsComponent } from './manager/statistics/statistics.component';
 import { isManager } from '../guards/is-manager.guard';
+import { isGoogle } from '../guards/is-google.guard';
 
 const routes: Routes = [
   {
     path: 'userInfo',
     component: UsersPageComponent,
-    canActivate: [loggedInGuard],
+    canActivate: [loggedInGuard, isGoogle],
   },
   {
     path: 'deposit',
