@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatChipListboxChange } from '@angular/material/chips';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { ClientService } from 'src/app/services/client.service';
@@ -20,6 +22,11 @@ export class StationClientDialogComponent {
   station?: IStation;
   bicycles: IBicycle[] = [];
   hasRentedBike: boolean = false;
+  bicyclesCount: number = 0;
+  pagesCount: number = 0;
+  page: number = 0;
+  pageSize: number = 4;
+  bicycleTypeFilter: string = '';
 
   selectedBicycleId: string | null = null;
   actionInProgress: boolean = false;
@@ -52,11 +59,16 @@ export class StationClientDialogComponent {
     private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) stationId: number
   ) {
-    this.stationService.getStation(stationId).subscribe((data) => {
-      this.station = data.station;
-      this.bicycles = data.bicycles;
-      this.hasRentedBike = data.hasRentedBike;
-    });
+    this.stationService
+      .getStation(stationId, null, this.pageSize, this.page)
+      .subscribe((data) => {
+        console.log(data);
+        this.station = data.station;
+        this.bicycles = data.bicycles;
+        this.hasRentedBike = data.hasRentedBike;
+        this.bicyclesCount = data.length;
+        this.pagesCount = data.pages;
+      });
 
     this.rentBikeForm = new FormGroup({
       numberOfHours: this.numberOfHours,
@@ -103,8 +115,6 @@ export class StationClientDialogComponent {
     };
     this.clientService.rentBicycle(data).subscribe({
       next: (data) => {
-        // prikazi kredite, lock code i update bicycles i hasRentedBike
-
         this.store.dispatch(rentBicycleSuccess({ balance: data.balance }));
         this.toastr.success(
           `You have successfully rented a bicycle. Lock code: ${data.lockCode}. Credits left: ${data.balance}`
@@ -148,6 +158,41 @@ export class StationClientDialogComponent {
     this.clientService.returnBicycle(this.station.id).subscribe(() => {
       this.toastr.success('You have successfully returned a bicycle');
       this.dialogRef.close();
+    });
+  }
+
+  filterChanged(event: MatChipListboxChange) {
+    this.bicycleTypeFilter = event.value;
+    this.page = 0;
+    this.updateBicycles();
+  }
+
+  pageChanged(event: PageEvent) {
+    this.page = event.pageIndex;
+    this.pageSize = event.pageSize;
+
+    this.updateBicycles();
+  }
+
+  updateBicycles() {
+    let request$ = this.stationService.getStation(
+      this.station?.id!,
+      null,
+      this.pageSize,
+      this.page
+    );
+    if (this.bicycleTypeFilter)
+      request$ = this.stationService.getStation(
+        this.station?.id!,
+        this.bicycleTypeFilter,
+        this.pageSize,
+        this.page
+      );
+
+    request$.subscribe((data) => {
+      this.bicycles = data.bicycles;
+      this.bicyclesCount = data.length;
+      this.pagesCount = data.pages;
     });
   }
 

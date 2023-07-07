@@ -24,16 +24,37 @@ export class StationService {
     return this.http.get<IStation[]>(`${environment.apiUrl}/station`);
   }
 
-  getStation(id: number): Observable<{
+  getStation(
+    id: number,
+    bicycleType?: string | null,
+    pageSize?: number | null,
+    pageNumber?: number | null
+  ): Observable<{
     station: IStation;
     bicycles: IBicycle[];
     hasRentedBike: boolean;
+    length: number;
+    pages: number;
   }> {
+    console.log(pageNumber);
+    let url = `${environment.apiUrl}/station/${id}?`;
+    if (bicycleType) url += `bicycleType=${bicycleType}&`;
+
+    if (pageSize) url += `pageSize=${pageSize}&`;
+
+    if (pageNumber) url += `pageNumber=${pageNumber}`;
+
+    if (pageNumber === 0) url += `pageNumber=${pageNumber}`;
+
+    console.log(url);
+
     return this.http.get<{
       station: IStation;
       bicycles: IBicycle[];
       hasRentedBike: boolean;
-    }>(`${environment.apiUrl}/station/${id}`, {
+      length: number;
+      pages: number;
+    }>(url, {
       headers: {
         Authorization: `Bearer ${this.token}`,
       },

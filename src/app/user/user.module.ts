@@ -27,6 +27,8 @@ import { BreakdownTabComponent } from './servicer/breakdown-tab/breakdown-tab.co
 import { ServiceTabComponent } from './servicer/service-tab/service-tab.component';
 import { StationManagerDialogComponent } from './manager/station-manager-dialog/station-manager-dialog.component';
 import { StationServicerDialogComponent } from './servicer/station-servicer-dialog/station-servicer-dialog.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { StatisticsComponent } from './manager/statistics/statistics.component';
 
@@ -60,6 +62,8 @@ import { StatisticsComponent } from './manager/statistics/statistics.component';
     MatSelectModule,
     MatProgressSpinnerModule,
     MatTabsModule,
+    MatChipsModule,
+    MatPaginatorModule,
   ],
   exports: [AddStationComponent],
 })
