@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: '',
+  apiUrl: 'https://localhost:7050/api',
   rentHourPrice: 5,
 };
